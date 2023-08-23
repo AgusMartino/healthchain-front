@@ -21,7 +21,7 @@
         <div id="passwordException"></div>
         <div class="row mt-3">
             <div class="col">
-                <router-link to="/resetPassword" target="_blank">Olvide mi contraseña</router-link>
+                <router-link style="text-decoration:underline" to="/resetPassword" target="_blank">Olvide mi contraseña</router-link>
             </div>
         </div>
         <div class="row mt-3">
