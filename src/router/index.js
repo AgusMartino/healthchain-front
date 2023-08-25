@@ -56,9 +56,18 @@ router.beforeEach((to,from,next)=>{
     next(false);
   }
   
-  let routerAuthCheck = true;
+  let routerAuthCheck = false;
+  if(localStorage.getItem('access_token')&& localStorage.getItem('id_token')&& localStorage.getItem('expires_at')){
+    console.log('found local storage tokens')
+    let expiresAt = JSON.parse(localStorage.getItem('expires_at'))
+    routerAuthCheck = new Date().getDate() < expiresAt
+  }
+  Store.commit('setUserIsAuthenticated', routerAuthCheck);
   if(routerAuthCheck){
     Store.commit('setUserIsAuthenticated', true);
+  }
+  else{
+    Store.commit('setUserIsAuthenticated', false);
   }
   if(to.matched.some(record => record.meta.requiresAuth)){
     if(routerAuthCheck){
