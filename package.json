@@ -9,11 +9,14 @@
   "dependencies": {
     "@mdi/font": "5.9.55",
     "auth0-js": "^9.22.1",
+    "axios": "^1.5.0",
+    "bootstrap": "^5.3.1",
     "core-js": "^3.8.3",
     "roboto-fontface": "*",
+    "vee-validate": "^4.5.8",
     "vue": "^3.2.13",
     "vue-router": "^4.2.4",
-    "vuetify": "^3.0.0-beta.0",
+    "vuetify": "^3.3.14",
     "vuex": "^4.0.0",
     "webfontloader": "^1.0.0"
   },

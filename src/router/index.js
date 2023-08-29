@@ -6,6 +6,10 @@ import contact from '../views/Contact.vue'
 import member from '../views/Members.vue'
 import Store from '../store'
 import Callback from '../views/callback.vue'
+import seleccionUsuario from '../views/seleccionUsuario.vue'
+import CrearEmpresaBO from '../views/Panel/CrearEmpresaBO.vue'
+import loginBO from '../views/Panel/LoginBO.vue'
+import HomeBO from '../views/Panel/HomeBO.vue'
 
 
 const routes = [
@@ -15,7 +19,7 @@ const routes = [
     component: Callback
   },
   {
-    path: '/',
+    path: '/login',
     name: 'login',
     component: login
   },
@@ -25,7 +29,7 @@ const routes = [
     component: about
   },
   {
-    path: '/home',
+    path: '/',
     name: 'home',
     component: home
   },
@@ -40,6 +44,27 @@ const routes = [
     name: 'member',
     component: member,
     meta: {requiresAuth: true }
+  },
+  {
+    path: '/seleccionUsuario',
+    name: 'seleccionUsuario',
+    component: seleccionUsuario,
+    meta: {requiresAuth: true }
+  },
+  {
+    path: '/CrearEmpresaBO',
+    name: 'CrearEmpresaBO',
+    component: CrearEmpresaBO,
+  },
+  {
+    path: '/loginBO',
+    name: 'loginBO',
+    component: loginBO,
+  },
+  {
+    path: '/HomeBO',
+    name: 'HomeBO',
+    component: HomeBO,
   },
 ]
 

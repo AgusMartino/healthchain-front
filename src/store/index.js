@@ -4,7 +4,7 @@ import router from '../router'
 
 export default createStore({
   state: {
-    userIsAuthorized:true,
+    userIsAuthorized:false,
     auth0: new auth0.WebAuth({
       domain: process.env.VUE_APP_Healtchain_AUTH0_DOMAIN, 
       clientID: process.env.VUE_APP_Healtchain_AUTH0_CLIENTID,
@@ -34,7 +34,7 @@ export default createStore({
           localStorage.setItem('id_token', authResult.idToken);
           localStorage.setItem('expires_at', expiresAt);  
 
-          router.replace('/members');
+          router.replace('/seleccionUsuario');
         } 
         else if (err) {
           alert('login failed. Error #KJN838');
@@ -43,13 +43,16 @@ export default createStore({
         }
       })
     },
-    auth0Logout(context){
-      localStorage.removeItem('access_token', authResult.accessToken);
-      localStorage.removeItem('id_token', authResult.idToken);
-      localStorage.removeItem('expires_at', expiresAt);
-      
-      window.location.href = process.env.VUE_APP_AUTH0_CONFIG_DOMAINURL + "/v2/logout?returnTo=" + process.env.VUE_APP_DOMAINURL + "/login&client_id=" + process.env.VUE_APP_Healtchain_AUTH0_CLIENTID;
-    }
+    auth0Logout (context) {
+      // No need to update the bearer in global axiosConfig to null because we are redirecting out of the application
+      // Clear Access Token and ID Token from local storage
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('id_token');
+      localStorage.removeItem('expires_at');
+
+      // redirect to auth0 logout to completely log the user out
+      window.location.href = process.env.VUE_APP_AUTH0_CONFIG_DOMAINURL + "/v2/logout?returnTo=" + process.env.VUE_APP_DOMAINURL + "/login&client_id=" + process.env.VUE_APP_Healtchain_AUTH0_CLIENTID; 
+    },    
   },
   modules: {
   }

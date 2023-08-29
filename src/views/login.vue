@@ -13,37 +13,13 @@
                     <h3 class="headline mb-0">Bienvenido a HealthChain</h3>
                     <div>                        
                       <br><br>
-                        Login to connect. 
+                        Ingrese sesion mediante google
                       <br><br>
-                      <div class="row mt-2">
-                        <div id="validationException"></div>
-                            <div class="col">
-                                <label for="user">
-                                    <span>Usuario:</span>
-                                    <input class="border" type="text" name="user" id="user" v-model="loginPostBody.username">
-                                </label>
-                            </div>
-                        </div>
-                        <div id="userException"></div>
-                        <div class="row mt-2">
-                            <div class="col">
-                                <label for="password">
-                                    <span>Contraseña:</span>
-                                    <input class="border" type="password" name="password" id="password" v-model="loginPostBody.password">
-                                </label>
-                            </div>
-                        </div>
-                        <div id="passwordException"></div>
-                        <div class="row mt-2">
-                            <div class="col">
-                                <router-link style="text-decoration:underline" to="/resetPassword" target="_blank">Olvide mi contraseña</router-link>
-                            </div>
-                        </div>
                     </div>
                   </div>
                 </v-card-title>
-                <v-card-actions>
-                  <v-btn  @click="auth0Login()">Login</v-btn>
+                <v-card-actions class="conteiner">
+                  <v-btn variant="outlined" @click="auth0Login()">Login</v-btn>
                 </v-card-actions>
               </v-card>
             </v-flex>
