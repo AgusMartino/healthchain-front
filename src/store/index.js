@@ -33,7 +33,10 @@ export default createStore({
           localStorage.setItem('access_token', authResult.accessToken);
           localStorage.setItem('id_token', authResult.idToken);
           localStorage.setItem('expires_at', expiresAt);  
-
+          console.log(authResult.accessToken)
+          console.log(authResult.idToken)
+          console.log(expiresAt)
+          //Condicional si ya esta registrado, lo manda al home
           router.replace('/seleccionUsuario');
         } 
         else if (err) {
