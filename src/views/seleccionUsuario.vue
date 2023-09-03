@@ -34,11 +34,14 @@
     </v-container>
 </template>
 <script>
-
+import axios from 'axion'
 export default{
     components:{
     },
     methods:{
+        RegisterMedico(){
+            
+        },
         parseJwt () {
             const token = localStorage.getItem('id_token')
             const base64Url = token.split('.')[1];
