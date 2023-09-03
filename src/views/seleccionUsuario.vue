@@ -34,7 +34,7 @@
     </v-container>
 </template>
 <script>
-import axios from 'axion'
+//import axios from 'axion'
 export default{
     components:{
     },
