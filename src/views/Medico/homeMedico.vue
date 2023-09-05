@@ -6,11 +6,11 @@
                 <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
                     <v-card class="mx-auto" max-width="344" variant="outlined">
                         <div class="pa-3">
-                            Imagen empresa
+                            Imagen button
                         </div>
                         <hr>
                         <v-card-actions>
-                        <v-btn  variant="outlined" to="/">Soy empleado de obra social</v-btn>
+                        <v-btn  variant="outlined" @click="">Gestor de NFTs</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -20,11 +20,25 @@
                 <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
                     <v-card class="mx-auto" max-width="344" variant="outlined">
                         <div class="pa-3">
-                            Imagen medico
+                            Imagen button
                         </div>
                         <hr>
                         <v-card-actions>
-                        <v-btn variant="outlined" @click="RegisterMedico()">Soy medico</v-btn>
+                        <v-btn variant="outlined" @click="parseJwt()">Gestor de solicitudes</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-flex>
+            </div>
+                
+            <div>
+                <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
+                    <v-card class="mx-auto" max-width="344" variant="outlined">
+                        <div class="pa-3">
+                            Imagen button
+                        </div>
+                        <hr>
+                        <v-card-actions>
+                        <v-btn variant="outlined" @click="">Visualizar transacciones</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -39,36 +53,6 @@ export default{
     components:{
     },
     methods:{
-        RegisterMedico(){
-            const userdata = parseJwt()
-            const JsonRegister = {
-                user: userdata.email.toString(),
-                name: userdata.given_name.toString(),
-                lastname: userdata.family_name.toString(),
-                user_type: "1",
-                rol: {
-                    id: "4",
-                }
-            }
-            axios.post("https://localhost:7151/api/User/RegisterUser", this.JsonRegister)
-            .then(response=>{
-                    if(response.status==200){
-                        alert("registrado con exito!")
-                    }
-            })
-            .catch(err =>{
-                alert(err.data)
-            })
-        },
-        parseJwt () {
-            const token = localStorage.getItem('id_token')
-            const base64Url = token.split('.')[1];
-            const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-            return JSON.parse(jsonPayload)
-        }
     }
 }
 </script>
@@ -90,4 +74,3 @@ export default{
     padding-left: 30%
 }
 </style>
-

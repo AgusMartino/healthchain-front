@@ -1,0 +1,95 @@
+<template>
+    <v-container row wrap align-center>
+      <v-slide-y-transition mode="out-in">
+          <v-layout class="layout">
+            <div>
+                <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
+                    <v-card class="mx-auto" max-width="344" variant="outlined">
+                        <div class="pa-3">
+                            Imagen button
+                        </div>
+                        <hr>
+                        <v-card-actions>
+                        <v-btn  variant="outlined" @click="">Gestor de NFTs</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-flex>
+            </div>
+
+            <div>
+                <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
+                    <v-card class="mx-auto" max-width="344" variant="outlined">
+                        <div class="pa-3">
+                            Imagen button
+                        </div>
+                        <hr>
+                        <v-card-actions>
+                        <v-btn variant="outlined" @click="parseJwt()">Visualizar transacciones</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-flex>
+            </div>
+          </v-layout>
+        </v-slide-y-transition>
+        <v-slide-y-transition mode="out-in">
+          <v-layout class="layout">
+            <div>
+                <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
+                    <v-card class="mx-auto" max-width="344" variant="outlined">
+                        <div class="pa-3">
+                            Imagen button
+                        </div>
+                        <hr>
+                        <v-card-actions>
+                        <v-btn variant="outlined" @click="parseJwt()">Gestor de solicitudes de medicos</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-flex>
+            </div>
+
+            <div>
+                <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
+                    <v-card class="mx-auto" max-width="344" variant="outlined">
+                        <div class="pa-3">
+                            Imagen button
+                        </div>
+                        <hr>
+                        <v-card-actions>
+                        <v-btn variant="outlined" @click="">Gestor de solicitudes de empleados</v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-flex>
+            </div>
+          </v-layout>
+        </v-slide-y-transition>
+    </v-container>
+</template>
+<script>
+import axios from 'axios'
+export default{
+    components:{
+    },
+    methods:{
+    }
+}
+</script>
+<style>
+.layout{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.container{
+    justify-content: center;
+    align-items: center;
+}
+.col-4{
+    justify-content: center;
+    align-items: center;
+    margin-top: 10%;
+    padding-right: 30%;
+    padding-left: 30%
+}
+</style>
+

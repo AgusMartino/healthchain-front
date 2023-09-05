@@ -10,6 +10,9 @@ import seleccionUsuario from '../views/seleccionUsuario.vue'
 import CrearEmpresaBO from '../views/Panel/CrearEmpresaBO.vue'
 import loginBO from '../views/Panel/LoginBO.vue'
 import HomeBO from '../views/Panel/HomeBO.vue'
+import HomeEE from '../views/EmpleadoEmpresa/homeEmpleadoEmpresa.vue'
+import HomeM from '../views/Medico/homeMedico.vue'
+import seleccionEmpresaUser from '../views/seleccionEmpresaUser.vue'
 
 
 const routes = [
@@ -50,6 +53,21 @@ const routes = [
     name: 'seleccionUsuario',
     component: seleccionUsuario,
     meta: {requiresAuth: true }
+  },
+  {
+    path: '/seleccionEmpresaUser',
+    name: 'seleccionEmpresaUser',
+    component: seleccionEmpresaUser,
+  },
+  {
+    path: '/HomeEE',
+    name: 'HomeEE',
+    component: HomeEE,
+  },
+  {
+    path: '/HomeM',
+    name: 'HomeM',
+    component: HomeM,
   },
   {
     path: '/CrearEmpresaBO',
