@@ -41,12 +41,17 @@ export default createStore({
           const userData = []
           userData = validateUser()
           //Condicional si ya tiene un tipo de usuario lo envio a su home correspondiente
-          if(userData.user_type == 1){
-            router.replace('/home')
-          }
-          else if(userData.user_type == 2){
-            router.replace('/home')
-          //si no tiene un home correspondiente lo envio a seleccionar su tipo de usuario
+          if(userData.id_usuario != null){
+            localStorage.setItem('id_usuario', userData.id_usuario);
+            localStorage.setItem('username', userData.usuario);
+            if(userData.user_type == 1 & userData.Rol.Id_Rol == null || userData.Rol.Id_Rol == ''){
+              router.replace('/seleccionEmpresaUser')
+            }else if (userData.user_type == 1 & userData.Rol.Id_Rol != null || userData.Rol.Id_Rol != ''){
+              router.replace('/homeEE')
+            }else if(userData.user_type == 2){
+              router.replace('/homeM')
+            //si no tiene un home correspondiente lo envio a seleccionar su tipo de usuario
+            }
           }else if(userData.user_type == null){
             router.replace('/seleccionUsuario');
           }

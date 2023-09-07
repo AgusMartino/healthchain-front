@@ -1,24 +1,30 @@
 <template>
     <form @submit.prevent="submit" class="form">
       <v-text-field
+        v-model="usuario.value.value"
+        :error-messages="usuario.errorMessage.value"
+        label="Usuario"
+      ></v-text-field>
+
+      <v-text-field
         v-model="name.value.value"
-        :counter="10"
         :error-messages="name.errorMessage.value"
         label="Nombre"
       ></v-text-field>
-  
+
+      <v-text-field
+        v-model="lastname.value.value"
+        :error-messages="lastname.errorMessage.value"
+        label="Apellido"
+      ></v-text-field>
+      
+      Cuit de la empresa:
       <v-text-field
         v-model="cuit.value.value"
-        :counter="7"
         :error-messages="cuit.errorMessage.value"
         label="Cuit"
       ></v-text-field>
-  
-      <v-text-field
-        v-model="direccion.value.value"
-        :error-messages="direccion.errorMessage.value"
-        label="direccion"
-      ></v-text-field>
+
       <div>
         <v-btn
         class="me-4"
@@ -39,7 +45,17 @@
   
     const { handleSubmit, handleReset } = useForm({
       validationSchema: {
+        usuario (value) {
+            if (/^[a-z.-]+@[a-z.-]+\.[a-z]+$/i.test(value)) return true
+  
+            return 'Debe ser un email valido.'
+        },
         name (value) {
+          if (value?.length >= 2) return true
+  
+          return 'Nombre tiene que tener mas de 2 caracteres.'
+        },
+        lastname (value) {
           if (value?.length >= 2) return true
   
           return 'Nombre tiene que tener mas de 2 caracteres.'
@@ -49,24 +65,25 @@
   
           return 'Cuit tiene que tener 9 digitos.'
         },
-        direccion (value) {
-          if (value?.length >= 7) return true
-  
-          return 'Tiene que tener al menos 7 caracteres la direccion.'
-        },
       },
     })
+    const usuario = useField('usuario')
     const name = useField('name')
+    const lastname = useField('lastname')
     const cuit = useField('cuit')
-    const direccion = useField('direccion')
   
     const submit = handleSubmit(values => {
       const Json = {
-        cuit: cuit.toString(),
+        user: usuario.toString(),
         name: name.toString(),
-        direccion: direccion.toString(),
+        lastname: lastname.toString(),
+        cuit_empresa: cuit.toString(),
+        user_type: "1",
+        rol: {
+            id: "2"
+            }
       }
-      axios.post("https://localhost:7227/api/Empresa/RegisterEmpresa", Json)
+      axios.post("https://localhost:7151/api/User/RegisterUser", Json)
             .then(response=>{
                     if(response.status==200){
                         alert("registrado con exito!")

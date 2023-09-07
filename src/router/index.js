@@ -1,9 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import login from '../views/login.vue'
-import about from '../views/About.vue'
-import home from '../views/Home.vue'
-import contact from '../views/Contact.vue'
-import member from '../views/Members.vue'
 import Store from '../store'
 import Callback from '../views/callback.vue'
 import seleccionUsuario from '../views/seleccionUsuario.vue'
@@ -27,32 +23,9 @@ const routes = [
     component: login
   },
   {
-    path: '/about',
-    name: 'about',
-    component: about
-  },
-  {
-    path: '/',
-    name: 'home',
-    component: home
-  },
-  {
-    path: '/contact',
-    name: 'contact',
-    component: contact,
-    meta: {requiresAuth: true }
-  },
-  {
-    path: '/members',
-    name: 'member',
-    component: member,
-    meta: {requiresAuth: true }
-  },
-  {
     path: '/seleccionUsuario',
     name: 'seleccionUsuario',
     component: seleccionUsuario,
-    meta: {requiresAuth: true }
   },
   {
     path: '/seleccionEmpresaUser',

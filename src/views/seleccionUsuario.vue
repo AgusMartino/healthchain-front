@@ -10,7 +10,7 @@
                         </div>
                         <hr>
                         <v-card-actions>
-                        <v-btn  variant="outlined" to="/">Soy empleado de obra social</v-btn>
+                        <v-btn  variant="outlined" @click="RegisterUsuarioEmpresa()">Soy empleado de obra social</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -50,16 +50,36 @@ export default{
                     id: "4",
                 }
             }
-            axios.post("https://localhost:7151/api/User/RegisterUser", this.JsonRegister)
+            axios.post("https://localhost:7151/api/User/RegisterUser", JsonRegister)
             .then(response=>{
                     if(response.status==200){
                         alert("registrado con exito!")
+                        router.replace('/homeM')
                     }
             })
             .catch(err =>{
                 alert(err.data)
             })
         },
+        RegisterUsuarioEmpresa(){
+              const userdata = parseJwt()
+              const JsonRegister = {
+                user: userdata.email.toString(),
+                name: userdata.given_name.toString(),
+                lastname: userdata.family_name.toString(),
+                user_type: "2"
+              }
+              axios.post("https://localhost:7151/api/User/RegisterUser", JsonRegister)
+              .then(response=>{
+                if(response.status==200){
+                        alert("registrado con exito!")
+                        router.replace('/seleccionEmpresaUser')
+                    }
+              })
+              .catch(err =>{
+                alert(err.data)
+              })
+            },
         parseJwt () {
             const token = localStorage.getItem('id_token')
             const base64Url = token.split('.')[1];
