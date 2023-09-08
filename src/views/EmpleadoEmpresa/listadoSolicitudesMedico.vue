@@ -39,6 +39,7 @@
                 id_solicitud: "string",
                 cuit_empresa: "string",
                 id_usuario: "string",
+                rolseleccionado: "string",
                 tipo_Solicitud: {
                     id: "string",
                     tipo: "string"
@@ -58,8 +59,11 @@
     },
     methods:{
         GetSolicitudes(){
-            const id = localStorage.getItem('id_usuario')
-            axios.get("https://localhost:7151/api/User/ValidateUser/" + localStorage.getItem)
+            const JsonRequest = {
+              cuit: localStorage.getItem('cuit_empresa'),
+              tipo: "1"
+            }
+            axios.get("https://localhost:7274/api/Solicitud/GetAllSolicitudes", JsonRequest)
                       .then(response=>{
                         this.JsonMapper = response.data;
                       })

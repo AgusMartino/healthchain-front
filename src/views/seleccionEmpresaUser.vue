@@ -62,6 +62,7 @@ import axios from 'axios';
           jsonSolicitud:{
             cuit_empresa: null,
             id_usuario: null,
+            rolSolicitdado: null,
             tipo_Solicitud: {
               id: "2",
             },
@@ -76,6 +77,7 @@ import axios from 'axios';
                 const userdata = GetUser()
                 this.jsonSolicitud.id_usuario = userdata.id_usuario.toString()
                 this.jsonSolicitud.cuit_empresa = this.cuit.toString()
+                this.jsonSolicitud.rolSolicitdado = this.Rolselect.toString()
                 axios.post("https://localhost:7274/api/Solicitud/RegisterSolicitud", this.jsonSolicitud)
                 .then(response=>{
                   if(response.status == 200)

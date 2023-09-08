@@ -44,6 +44,7 @@ export default createStore({
           if(userData.id_usuario != null){
             localStorage.setItem('id_usuario', userData.id_usuario);
             localStorage.setItem('username', userData.usuario);
+            localStorage.setItem('cuit_empresa', userData.cuit_empresa);
             if(userData.user_type == 1 & userData.Rol.Id_Rol == null || userData.Rol.Id_Rol == ''){
               router.replace('/seleccionEmpresaUser')
             }else if (userData.user_type == 1 & userData.Rol.Id_Rol != null || userData.Rol.Id_Rol != ''){
