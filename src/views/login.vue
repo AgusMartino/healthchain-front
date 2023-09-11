@@ -13,7 +13,7 @@
                     <h3 class="headline mb-0">Bienvenido a HealthChain</h3>
                     <div>                        
                       <br><br>
-                        Ingrese sesion mediante google
+                        Ingrese sesion mediante su cuenta de google
                       <br><br>
                     </div>
                   </div>

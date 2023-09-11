@@ -30,11 +30,11 @@
         class="me-4"
         type="submit"
       >
-        submit
+        Crear usuario Admin
       </v-btn>
   
       <v-btn @click="handleReset">
-        clear
+        Limpiar campos
       </v-btn>
       </div>  
       

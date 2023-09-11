@@ -24,11 +24,11 @@
         class="me-4"
         type="submit"
       >
-        submit
+        Crear Empresa
       </v-btn>
   
       <v-btn @click="handleReset">
-        clear
+        Limpiar campos
       </v-btn>
       </div>  
       

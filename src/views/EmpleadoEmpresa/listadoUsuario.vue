@@ -25,7 +25,7 @@
           <td>{{ item.name }}</td>
           <td>{{ item.lastname }}</td>
           <td>{{ item.rol.rol }}</td>
-          <td><v-btn variant="outlined" to="/">Aceptar/Rechazar</v-btn></td>
+          <td><v-btn variant="outlined" to="/">Modificar Rol</v-btn></td>
         </tr>
       </tbody>
     </v-table>

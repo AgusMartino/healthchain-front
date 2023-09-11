@@ -41,7 +41,7 @@
                         </div>
                         <hr>
                         <v-card-actions>
-                        <v-btn variant="outlined" @click="parseJwt()">Gestor de solicitudes de medicos</v-btn>
+                        <v-btn variant="outlined" >Gestor de solicitudes de medicos</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -55,7 +55,7 @@
                         </div>
                         <hr>
                         <v-card-actions>
-                        <v-btn variant="outlined" @click="">Gestor de solicitudes de empleados</v-btn>
+                        <v-btn variant="outlined" >Gestor de solicitudes de empleados</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>

@@ -59,7 +59,7 @@ export default{
                     alert('Bienvenido!');
                     localStorage.setItem("username", response.data.user.Nombre_Usuario)
                     localStorage.setItem("userid", response.data.user.Id_usuario)
-                    this.$router.push("/")
+                    this.$router.push("/HomeBO")
                     }
                 })
                 .catch(err =>{
