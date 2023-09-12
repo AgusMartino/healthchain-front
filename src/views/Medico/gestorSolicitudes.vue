@@ -10,7 +10,7 @@
                         </div>
                         <hr>
                         <v-card-actions>
-                        <v-btn  variant="outlined" To="/gestorNFTM">Gestor de NFTs</v-btn>
+                        <v-btn  variant="outlined" To="/crearSolicitudesMedicoM">Crear Solicitud</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -24,21 +24,7 @@
                         </div>
                         <hr>
                         <v-card-actions>
-                        <v-btn variant="outlined" To="/gestorSolicitudesM">Gestor de solicitudes</v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-flex>
-            </div>
-                
-            <div>
-                <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
-                    <v-card class="mx-auto" max-width="344" variant="outlined">
-                        <div class="pa-3">
-                            Imagen button
-                        </div>
-                        <hr>
-                        <v-card-actions>
-                        <v-btn variant="outlined">Visualizar transacciones</v-btn>
+                        <v-btn variant="outlined" To="/listadoSolicitudesRealizadasM">Lista de solicitudes</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>

@@ -25,7 +25,7 @@
           <td>{{ item.descripcion }}</td>
           <td>{{ item.fecha_creacion }}</td>
           <td>{{ item.estado }}</td>
-          <td><v-btn variant="outlined" to="/">Aceptar/Rechazar</v-btn></td>
+          <td><v-btn variant="outlined" :to="{name:'aceptarRechazarSolicitudEE', params:{user:item.id_usuario}}">Aceptar/Rechazar</v-btn></td>
         </tr>
       </tbody>
     </v-table>

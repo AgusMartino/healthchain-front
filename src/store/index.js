@@ -45,9 +45,11 @@ export default createStore({
             localStorage.setItem('id_usuario', userData.id_usuario);
             localStorage.setItem('username', userData.usuario);
             localStorage.setItem('cuit_empresa', userData.cuit_empresa);
-            if(userData.user_type == 1 & userData.Rol.Id_Rol == null || userData.Rol.Id_Rol == ''){
+            localStorage.setItem('rol', userData.rol.rol)
+            localStorage.setItem('user_type', userData.user_type)
+            if(userData.user_type == 1 & userData.rol.Id_Rol == null || userData.rol.Id_Rol == ''){
               router.replace('/seleccionEmpresaUser')
-            }else if (userData.user_type == 1 & userData.Rol.Id_Rol != null || userData.Rol.Id_Rol != ''){
+            }else if (userData.user_type == 1 & userData.rol.Id_Rol != null || userData.rol.Id_Rol != ''){
               router.replace('/homeEE')
             }else if(userData.user_type == 2){
               router.replace('/homeM')

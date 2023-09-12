@@ -25,7 +25,7 @@
           <td>{{ item.name }}</td>
           <td>{{ item.lastname }}</td>
           <td>{{ item.rol.rol }}</td>
-          <td><v-btn variant="outlined" to="/">Modificar Rol</v-btn></td>
+          <td><v-btn variant="outlined" :to="{name:'modificarUsuarioEE', params:{id_user:item.id}}">Modificar Rol</v-btn></td>
         </tr>
       </tbody>
     </v-table>
@@ -44,8 +44,8 @@
                 user_type: "string",
                 cuit_empresa: "string",
                 rol: {
-                id: "string",
-                rol: "string"
+                  id: "string",
+                  rol: "string"
                 },
                 fecha_creacion: "2023-09-08T00:04:45.447Z",
                 fecha_modificacion: "2023-09-08T00:04:45.447Z"

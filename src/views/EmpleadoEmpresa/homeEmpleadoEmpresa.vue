@@ -10,7 +10,7 @@
                         </div>
                         <hr>
                         <v-card-actions>
-                        <v-btn  variant="outlined" @click="">Gestor de NFTs</v-btn>
+                        <v-btn  variant="outlined" To="/gestorNFTEE">Gestor de NFTs</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -24,7 +24,7 @@
                         </div>
                         <hr>
                         <v-card-actions>
-                        <v-btn variant="outlined" @click="parseJwt()">Visualizar transacciones</v-btn>
+                        <v-btn variant="outlined" >Visualizar transacciones</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -41,7 +41,7 @@
                         </div>
                         <hr>
                         <v-card-actions>
-                        <v-btn variant="outlined" >Gestor de solicitudes de medicos</v-btn>
+                        <v-btn variant="outlined" To="/gestorMedicosEE">Gestor Medicos</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -55,7 +55,7 @@
                         </div>
                         <hr>
                         <v-card-actions>
-                        <v-btn variant="outlined" >Gestor de solicitudes de empleados</v-btn>
+                        <v-btn variant="outlined" To="/gestorUsuariosEE">Gestor de Usuarios</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
