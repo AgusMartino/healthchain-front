@@ -64,7 +64,7 @@
     methods:{
         GetSolicitudes(){
             const JsonRequest = {
-              cuit: localStorage.getItem('cuit_empresa'),
+              cuit: this.$store.state.cuit_empresa,
               tipo: "2"
             }
             axios.get("https://localhost:7274/api/Solicitud/GetAllSolicitudes", JsonRequest)

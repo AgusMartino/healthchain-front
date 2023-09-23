@@ -58,7 +58,7 @@
     },
     methods:{
         GetUsuarios(){            
-            axios.get("https://localhost:7151/api/User/GetUsersEmpresas/" + localStorage.getItem('cuit_empresa'))
+            axios.get("https://localhost:7151/api/User/GetUsersEmpresas/" + this.$store.state.cuit_empresa)
                       .then(response=>{
                         this.JsonMapper = response.data;
                       })

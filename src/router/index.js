@@ -9,17 +9,18 @@ import aceptarRechazarSolicitudEE from '../views/EmpleadoEmpresa/aceptarRechazar
 import listadoMedicosEE from '../views/EmpleadoEmpresa/listadoMedicos.vue'
 import listadoSolicitudesMedicoEE from '../views/EmpleadoEmpresa/listadoSolicitudesMedico.vue'
 import listadoSolicitudesUsuariosEE from '../views/EmpleadoEmpresa/listadoSolicitudesUsuarios.vue'
-import listadoUsuariosEE from '../views/EmpleadoEmpresa/listadoUsuarios.vue'
-import modificarUsuarioEE from '../views/EmpleadoEmpresa/modificarUsuario.vue'
-import gestorMedicosEE from '../views/EmpleadoEmpresa/modificarUsuario.vue'
-import gestorNFTEE from '../views/EmpleadoEmpresa/modificarUsuario.vue'
-import gestorUsuariosEE from '../views/EmpleadoEmpresa/modificarUsuario.vue'
+import listadoUsuariosEE from '../views/EmpleadoEmpresa/listadoUsuario.vue'
+import modificarUsuarioEE from '../views/EmpleadoEmpresa/modificarRolUsuario.vue'
+import gestorMedicosEE from '../views/EmpleadoEmpresa/gestorMedicos.vue'
+import gestorNFTEE from '../views/EmpleadoEmpresa/gestorNFT.vue'
+import gestorUsuariosEE from '../views/EmpleadoEmpresa/gestorUsuarios.vue'
 import HomeM from '../views/Medico/homeMedico.vue'
 import gestorNFTM from '../views/Medico/gestorNFT.vue'
 import gestorSolicitudesM from '../views/Medico/gestorSolicitudes.vue'
 import crearSolicitudesMedicoM from '../views/Medico/crearSolicitudes.vue'
 import listadoEmpresasAsociadasM from '../views/Medico/listadoEmpresasAsociadas.vue'
 import listadoSolicitudesRealizadasM from '../views/Medico/listadoSolicitudesRealizadas.vue'
+import HomeBO from '../views/Panel/HomeBO.vue'
 import CrearEmpresaBO from '../views/Panel/CrearEmpresaBO.vue'
 import loginBO from '../views/Panel/LoginBO.vue'
 import crearUsuarioAdminEmpresaBO from '../views/Panel/crearUsuarioAdminEmpresa.vue'
@@ -147,7 +148,7 @@ const routes = [
   {
     path: '/gestorUsuariosAdminBO',
     name: 'gestorUsuariosAdminBO',
-    component: HomeBO,
+    component: gestorUsuariosAdminBO,
   },
   {
     path: '/CrearEmpresaBO',

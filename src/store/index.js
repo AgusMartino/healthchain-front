@@ -6,7 +6,12 @@ import { validate } from 'vee-validate'
 
 export default createStore({
   state: {
-    userIsAuthorized:false,
+    user_type: null,
+    rol: null,
+    id_usuario: null,
+    username: null,
+    cuit_empresa: null,
+    userIsAuthorized: false,
     auth0: new auth0.WebAuth({
       domain: process.env.VUE_APP_Healtchain_AUTH0_DOMAIN, 
       clientID: process.env.VUE_APP_Healtchain_AUTH0_CLIENTID,
@@ -42,11 +47,11 @@ export default createStore({
           userData = validateUser()
           //Condicional si ya tiene un tipo de usuario lo envio a su home correspondiente
           if(userData.id_usuario != null){
-            localStorage.setItem('id_usuario', userData.id_usuario);
-            localStorage.setItem('username', userData.usuario);
-            localStorage.setItem('cuit_empresa', userData.cuit_empresa);
-            localStorage.setItem('rol', userData.rol.rol)
-            localStorage.setItem('user_type', userData.user_type)
+            this.id_usuario = userData.id_usuario;
+            this.username = userData.usuario;
+            this.cuit_empresa = userData.cuit_empresa;
+            this.rol = userData.rol.rol;
+            this.user_type = userData.user_type;
             if(userData.user_type == 1 & userData.rol.Id_Rol == null || userData.rol.Id_Rol == ''){
               router.replace('/seleccionEmpresaUser')
             }else if (userData.user_type == 1 & userData.rol.Id_Rol != null || userData.rol.Id_Rol != ''){

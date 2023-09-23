@@ -46,7 +46,7 @@
     },
     methods:{
         GetEmpresasAsociadas(){
-            const username = localStorage.getItem('username')
+            const username = this.$store.state.username
             axios.get("https://localhost:7227/api/Empresa/GetAllEmpresaAsociadasMedico/" + username)
                       .then(response=>{
                         this.JsonMapper = response.data;

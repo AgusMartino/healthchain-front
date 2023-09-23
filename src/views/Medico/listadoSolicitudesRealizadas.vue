@@ -62,7 +62,7 @@
     },
     methods:{
         GetSolicitudes(){
-            const username = localStorage.getItem('id_usuario').toString()
+            const username = this.$store.state.id_usuario;
             axios.get("https://localhost:7274/api/Solicitud/GetAllSolicitudesUsuario/", + username)
                       .then(response=>{
                         this.JsonMapper = response.data;

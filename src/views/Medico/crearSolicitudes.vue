@@ -92,7 +92,7 @@ import axios from 'axios';
     },
     methods: {
             Solicitud(){
-                this.jsonSolicitud.id_usuario = localStorage.getItem('id_usuario').toString()
+                this.jsonSolicitud.id_usuario = this.$store.state.id_usuario;
                 this.jsonSolicitud.cuit_empresa = this.EmpresaSelect.toString()
                 axios.post("https://localhost:7274/api/Solicitud/RegisterSolicitud", this.jsonSolicitud)
                 .then(response=>{

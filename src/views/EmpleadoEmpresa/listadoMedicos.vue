@@ -48,7 +48,7 @@
     },
     methods:{
         GetMedicos(){            
-            axios.get("https://localhost:7227/api/Medico/GetAllMedicosEmpresas/" + localStorage.getItem('cuit_empresa'))
+            axios.get("https://localhost:7227/api/Medico/GetAllMedicosEmpresas/" + this.$store.state.cuit_empresa)
                       .then(response=>{
                         this.JsonMapper = response.data;
                       })
