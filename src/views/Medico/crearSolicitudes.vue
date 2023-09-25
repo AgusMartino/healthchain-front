@@ -10,7 +10,7 @@
     ></v-select>
   </form>
 
-  <form v-if="this.selectEmpresa">
+  <form>
 
       Cuit de empresa Seleccionada:
       <v-text-field
@@ -21,18 +21,18 @@
       Informacioncion del solicitante:
 
       <v-text-field
+        v-model="this.userData.nombre"
         disabled
-        v-model="userData.nombre"
       ></v-text-field>
 
       <v-text-field
+        v-model="this.userData.apellido"
         disabled
-        v-model="userData.apellido"
       ></v-text-field>
 
       <v-text-field
-        disabled  
-        v-model="userData.especialidad"
+        v-model="this.userData.especialidad"
+        disabled
       ></v-text-field>
 
       <v-text-field
@@ -43,7 +43,6 @@
       <div>
         <v-btn
         class="me-4"
-        type="submit"
         @click="Solicitud()"
       >
         Enviar Solicitud
@@ -53,10 +52,11 @@
 </template>
   <script>
 import axios from 'axios';
+import router from '../../router';
     export default{
       data(){
         return{
-          selectEmpresa: false,
+          selectEmpresa: null,
           EmpresaSelect: "",
           jsonEmpresa:[
               {
@@ -68,27 +68,27 @@ import axios from 'axios';
                 fecha_modificacion: "2023-09-09T22:21:57.610Z"
               }
           ],
-          userData: {
-            nombre: "",
-            apellido: "",
-            especialidad: "",
-          },
+          userData: [],
           jsonSolicitud:{
+            id_solicitud: "",
             cuit_empresa: null,
             id_usuario: null,
-            rolSolicitdado: null,
+            rolseleccionado: null,
             tipo_Solicitud: {
               id: "1",
+              tipo: "",
             },
             descripcion: null,
             estado: "1",
+            user: "",
+            nombreEmpresa: ""
           }
         }
         
       },
     mounted(){
-      this.GetUser(),
-      this.GetEmpresas()
+      this.GetEmpresas(),
+      this.GetUser()
     },
     methods: {
             Solicitud(){
@@ -105,14 +105,16 @@ import axios from 'axios';
                 })
               },
             GetUser(){
-              const jsonPayload = localStorage.get('username')
-              axios.get("https://localhost:7227/api/Medico/GetMedico/" + jsonPayload)
-                      .then(response=>{
-                        this.userData = response.data;
-                      })
-                      .catch(err =>{
-                        alert(err.data)
-                      })
+              console.log(this.$store.state.id_usuario)
+              const jsonPayload = this.$store.state.id_usuario
+                    axios.get("https://localhost:7227/api/Medico/GetMedico/" + jsonPayload)
+                        .then(response=>{
+                          this.userData = response.data;
+                          console.log(this.userData)
+                        })
+                        .catch(err =>{
+                          alert(err.data)
+                        })
             },
             GetEmpresas(){
                 axios.get("https://localhost:7227/api/Empresa/GetAllEmpresa")

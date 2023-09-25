@@ -18,7 +18,7 @@
       </thead>
       <tbody>
         <tr
-          v-for="item in JsonMapper"
+          v-for="item in this.JsonMapper"
           :key="item.usuario"
         >
           <td>{{ item.usuario }}</td>
@@ -30,17 +30,17 @@
     </v-table>
 </template>
 <script>
+  import axios from 'axios'
   export default {
     data () {
       return {
-        JsonMapper:[
-            {
+        JsonMapper:{
                 nombre: "string",
                 apellido: "string",
                 usuario: "string",
                 especialidad: "string"
             }
-        ],
+        ,
       }
     },
     mounted() {
@@ -51,6 +51,7 @@
             axios.get("https://localhost:7227/api/Medico/GetAllMedicosEmpresas/" + this.$store.state.cuit_empresa)
                       .then(response=>{
                         this.JsonMapper = response.data;
+                        console.log(this.JsonMapper)
                       })
                       .catch(err =>{
                         alert(err.data)

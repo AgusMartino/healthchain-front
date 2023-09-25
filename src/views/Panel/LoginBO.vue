@@ -14,7 +14,7 @@
                     <div>                        
                       <br><br>
                         <v-text-field
-                            v-model="loginPostBody.username"
+                            v-model="loginPostBody.usuario"
                             label="Usuario"
                         ></v-text-field>
                     
@@ -40,33 +40,38 @@
 
 <script>
 import axios from "axios"
+import router from '../../router'
 
 export default{
     data(){
         return {
             loginPostBody: {
-                username: "",
+                usuario: "",
                 password: ""
             }
         };
     },
     methods: {
             login(){
-                this.loading = true
-                axios.post("https://localhost:44398/User/Login", this.loginPostBody)
+              console.log(this.loginPostBody.password)
+              console.log(this.loginPostBody.usuario)
+                axios.post("https://localhost:7151/api/User/LoginUserBO", this.loginPostBody)
                 .then(response=> {
-                    if(response.status==200) {
-                    alert('Bienvenido!');
-                    localStorage.setItem("username", response.data.user.Nombre_Usuario)
-                    localStorage.setItem("userid", response.data.user.Id_usuario)
-                    this.$router.push("/HomeBO")
+                    if(response.status==200){
+                      if(response.data.id == null){
+                        alert('Nombre de usuario o contraseña incorrecto')
+                      }else if(response.data.id != null){
+                        alert('Bienvenido!');
+                        this.$store.state.id_usuario = response.data.id,
+                        this.$store.state.username = response.data.user,
+                        this.$store.state.user_type = response.data.user_type,
+                        console.log(this.loginPostBody.usuario)
+                        router.replace("/HomeBO")
+                      }
                     }
                 })
                 .catch(err =>{
                     alert(err.Message)
-                })
-                .finally(data =>{
-                this.loading = false
                 })
             }
         }

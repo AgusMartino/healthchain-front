@@ -35,12 +35,71 @@
 </template>
 <script>
 import axios from 'axios'
+import router from '../router'
 export default{
+    data(){
+        return {
+            entradasJSON: [],
+        };
+    },
     components:{
     },
+    mounted() {
+        this.validateUser()
+    },
     methods:{
+        validateUser(){
+              const jsonPayload = this.parseJwt();
+              console.log(jsonPayload.email.toString())
+              axios.get("https://localhost:7151/api/User/ValidateUser/" + jsonPayload.email.toString())
+                .then(response=>{
+                    if(response.status == 200){
+                        console.log(response.data.user)
+                        this.entradasJSON = response.data;
+                        console.log("Comenzado validacion")
+                        console.log(this.entradasJSON.user)
+                        console.log(this)
+                        if(this.entradasJSON.id != null){
+                            this.$store.state.id_usuario = this.entradasJSON.id;
+                            this.$store.state.username = this.entradasJSON.user;
+                            this.$store.state.cuit_empresa = this.entradasJSON.cuit_empresa;
+                            this.$store.state.rol = this.entradasJSON.rol.rol;
+                            this.$store.state.user_type = this.entradasJSON.user_type;
+                            if(this.entradasJSON.user_type == 1){
+                            if(this.entradasJSON.rol.id == null || this.entradasJSON.rol.id == ''){
+                                router.replace('/seleccionEmpresaUser')
+                            }else if(this.entradasJSON.rol.id != null || this.entradasJSON.rol.id != ''){
+                                    router.replace('/homeEE')
+                                }
+                            }else if(this.entradasJSON.user_type == 2){
+                            router.replace('/homeM')
+                            }
+                            }else if(this.entradasJSON.user_type == null){
+                            router.replace('/seleccionUsuario')}
+                    } 
+                })
+                .catch(err =>{
+                  alert(err.data)
+                })
+                console.log(this)
+              
+            },
+        GetUser(){
+            const jsonPayload = this.parseJwt();
+            console.log(jsonPayload.email.toString())
+            axios.get("https://localhost:7151/api/User/ValidateUser/" + jsonPayload.email.toString())
+                .then(response=>{
+                    if(response.status == 200){
+                        console.log(response.data.user)
+                        this.entradasJSON = response.data;
+                    } 
+                })
+                .catch(err =>{
+                  alert(err.data)
+                })
+        },
         RegisterMedico(){
-            const userdata = parseJwt()
+            const userdata = this.parseJwt()
             const JsonRegister = {
                 user: userdata.email.toString(),
                 name: userdata.given_name.toString(),
@@ -62,7 +121,7 @@ export default{
             })
         },
         RegisterUsuarioEmpresa(){
-              const userdata = parseJwt()
+              const userdata = this.parseJwt()
               const JsonRegister = {
                 user: userdata.email.toString(),
                 name: userdata.given_name.toString(),
@@ -80,7 +139,7 @@ export default{
                 alert(err.data)
               })
             },
-        parseJwt () {
+        parseJwt() {
             const token = localStorage.getItem('id_token')
             const base64Url = token.split('.')[1];
             const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');

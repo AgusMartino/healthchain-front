@@ -43,7 +43,8 @@
     </form>
 </template>
   <script>
-import axios from 'axios';
+  import axios from 'axios'
+  import router from '../router'
     export default{
       data(){
         return{
@@ -75,7 +76,7 @@ import axios from 'axios';
     methods: {
             Solicitud(){
                 const userdata = GetUser()
-                this.jsonSolicitud.id_usuario = userdata.id_usuario.toString()
+                this.jsonSolicitud.id_usuario = userdata.id.toString()
                 this.jsonSolicitud.cuit_empresa = this.cuit.toString()
                 this.jsonSolicitud.rolSolicitdado = this.Rolselect.toString()
                 axios.post("https://localhost:7274/api/Solicitud/RegisterSolicitud", this.jsonSolicitud)
@@ -128,7 +129,7 @@ import axios from 'axios';
               console.log(e)
               this.Rol = e
             },
-            parseJwt () {
+            parseJwt() {
             const token = localStorage.getItem('id_token')
             const base64Url = token.split('.')[1];
             const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');

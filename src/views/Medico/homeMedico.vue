@@ -10,7 +10,7 @@
                         </div>
                         <hr>
                         <v-card-actions>
-                        <v-btn  variant="outlined" To="/gestorNFTM">Gestor de NFTs</v-btn>
+                        <v-btn  variant="outlined" to="/gestorNFTM">Gestor de NFTs</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -24,7 +24,7 @@
                         </div>
                         <hr>
                         <v-card-actions>
-                        <v-btn variant="outlined" To="/gestorSolicitudesM">Gestor de solicitudes</v-btn>
+                        <v-btn variant="outlined" to="/gestorSolicitudesM">Gestor de solicitudes</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>

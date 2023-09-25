@@ -18,7 +18,7 @@
       </thead>
       <tbody>
         <tr
-          v-for="item in JsonMapper"
+          v-for="item in this.JsonMapper"
           :key="item.usuario"
         >
           <td>{{ item.user }}</td>
@@ -31,6 +31,7 @@
     </v-table>
 </template>
 <script>
+import axios from 'axios'
   export default {
     data () {
       return {
@@ -54,7 +55,7 @@
       }
     },
     mounted() {
-        this.GetMedicos()
+        this.GetUsuarios()
     },
     methods:{
         GetUsuarios(){            

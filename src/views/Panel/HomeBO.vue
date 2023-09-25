@@ -6,7 +6,7 @@
                 <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
                     <v-card class="mx-auto" max-width="344" variant="outlined">
                         <v-card-actions>
-                        <v-btn  variant="outlined" To="/gestorEmpresaBO">Gestor empresa</v-btn>
+                        <v-btn  variant="outlined" to="/gestorEmpresaBO">Gestor empresa</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -16,7 +16,7 @@
                 <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
                     <v-card class="mx-auto" max-width="344" variant="outlined">
                         <v-card-actions>
-                        <v-btn  variant="outlined" To="/gestorUsuariosAdminBO">Gestor usuarios administradores</v-btn>
+                        <v-btn  variant="outlined" to="/gestorUsuariosAdminBO">Gestor usuarios administradores</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>

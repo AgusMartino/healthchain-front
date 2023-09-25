@@ -10,7 +10,7 @@
                         </div>
                         <hr>
                         <v-card-actions>
-                        <v-btn  variant="outlined" To="/crearSolicitudesMedicoM">Crear Solicitud</v-btn>
+                        <v-btn  variant="outlined" to="/crearSolicitudesMedicoM">Crear Solicitud</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
@@ -24,7 +24,7 @@
                         </div>
                         <hr>
                         <v-card-actions>
-                        <v-btn variant="outlined" To="/listadoSolicitudesRealizadasM">Lista de solicitudes</v-btn>
+                        <v-btn variant="outlined" to="/listadoSolicitudesRealizadasM">Lista de solicitudes</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>

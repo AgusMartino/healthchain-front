@@ -43,26 +43,7 @@ export default createStore({
           console.log(authResult.accessToken)
           console.log(authResult.idToken)
           console.log(expiresAt)
-          const userData = []
-          userData = validateUser()
-          //Condicional si ya tiene un tipo de usuario lo envio a su home correspondiente
-          if(userData.id_usuario != null){
-            this.id_usuario = userData.id_usuario;
-            this.username = userData.usuario;
-            this.cuit_empresa = userData.cuit_empresa;
-            this.rol = userData.rol.rol;
-            this.user_type = userData.user_type;
-            if(userData.user_type == 1 & userData.rol.Id_Rol == null || userData.rol.Id_Rol == ''){
-              router.replace('/seleccionEmpresaUser')
-            }else if (userData.user_type == 1 & userData.rol.Id_Rol != null || userData.rol.Id_Rol != ''){
-              router.replace('/homeEE')
-            }else if(userData.user_type == 2){
-              router.replace('/homeM')
-            //si no tiene un home correspondiente lo envio a seleccionar su tipo de usuario
-            }
-          }else if(userData.user_type == null){
-            router.replace('/seleccionUsuario');
-          }
+          router.replace('/seleccionUsuario')
         } 
         else if (err) {
           alert('login failed. Error #KJN838');
@@ -89,19 +70,7 @@ export default createStore({
         return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
       }).join(''));
       return JSON.parse(jsonPayload)
-    },
-    validateUser(){
-      const jsonPayload = decodeToken();
-      const userData = [];
-      axios.get("https://localhost:7151/api/User/ValidateUser/" + jsonPayload.email.toString())
-              .then(response=>{
-                this.userData = response.data;
-              })
-              .catch(err =>{
-                alert(err.data)
-              })
-      return userData;
-    }    
+    }   
   },
   modules: {
   }

@@ -8,12 +8,12 @@
 
         <v-text-field
           disabled
-          v-model="userData.nombre"
+          v-model="userData.name"
         ></v-text-field>
   
         <v-text-field
           disabled
-          v-model="userData.apellido"
+          v-model="userData.lastname"
         ></v-text-field>
 
         <v-select
@@ -28,16 +28,16 @@
         <div>
           <v-btn
           class="me-4"
-          type="submit"
           @click="ModifyUsuario()"
         >
-          Actualizar Estado Solicitud
+          Modificar Rol Usuario
         </v-btn>
         </div>  
       </form>
   </template>
     <script>
   import axios from 'axios';
+  import router from '../../router'
       export default{
         props: {
         id_user: String
@@ -72,17 +72,16 @@
       },
       methods: {
               ModifyUsuario(){
-                  axios.post("https://localhost:7151/api/User/UpdateUser", this.userData)
+                  axios.put("https://localhost:7151/api/User/UpdateUser", this.userData)
                   .then(response=>{
                     if(response.status == 200)
                       alert("Usuario Modificado con Exito")
-                      router.replace('/homeEE')
                   })
                   .catch(err =>{
                     alert(err.data)
                   })
                 },
-                GetUserUsuario(){
+                GetUsuario(){
                     const jsonPayload = this.id_user
                     axios.get("https://localhost:7151/api/User/GetUser/" + jsonPayload)
                         .then(response=>{

@@ -10,7 +10,7 @@
                         </div>
                         <hr>
                         <v-card-actions>
-                        <v-btn  variant="outlined" To="/crearUsuarioAdminEmpresaBO">Crear Usuario para empresa</v-btn>
+                        <v-btn  variant="outlined" to="/crearUsuarioAdminEmpresaBO">Crear Usuario para empresa</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
