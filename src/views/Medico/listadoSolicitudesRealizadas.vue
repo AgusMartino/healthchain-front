@@ -21,7 +21,7 @@
       </thead>
       <tbody>
         <tr
-          v-for="item in JsonMapper"
+          v-for="item in this.JsonMapper"
           :key="item.id_solicitud"
         >
           <td>{{ item.cuit_empresa }}</td>
@@ -34,6 +34,7 @@
     </v-table>
 </template>
 <script>
+import axios from 'axios'
   export default {
     data () {
       return {
@@ -63,7 +64,7 @@
     methods:{
         GetSolicitudes(){
             const username = this.$store.state.id_usuario;
-            axios.get("https://localhost:7274/api/Solicitud/GetAllSolicitudesUsuario/", + username)
+            axios.get("https://localhost:7274/api/Solicitud/GetAllSolicitudesUsuario/" + username)
                       .then(response=>{
                         this.JsonMapper = response.data;
                       })

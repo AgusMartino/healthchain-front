@@ -72,18 +72,18 @@
                 especialidad: "Nutricionista"
             },
             jsonSolicitud:{
-                id_solicitud: "string",
-                cuit_empresa: "string",
-                id_usuario: "string",
-                rolseleccionado: "string",
+                id_solicitud: "",
+                cuit_empresa: "",
+                id_usuario: "",
+                rolseleccionado: "",
                 tipo_Solicitud: {
-                    id: "string",
-                    tipo: "string"
+                    id: "",
+                    tipo: ""
                 },
-                descripcion: "string",
-                estado: "string",
-                user: "string",
-                nombreEmpresa: "string"
+                descripcion: "",
+                estado: "",
+                user: "",
+                nombreEmpresa: ""
             }
           }
           
@@ -93,22 +93,12 @@
       },
       methods: {
               ModifySolicitud(){
-                  const Json = {
-                    id_solicitud: this.jsonSolicitud.id_solicitud,
-                    cuit_empresa: this.jsonSolicitud.cuit_empresa,
-                    id_usuario: this.jsonSolicitud.id_usuario,
-                    rolseleccionado: this.jsonSolicitud.rolseleccionado,
-                    tipo_Solicitud: {
-                      id: "1",
-                      tipo: ""
-                    },
-                    descripcion: this.jsonSolicitud.descripcion,
-                    estado: this.jsonSolicitud.estado,
-                    user: this.jsonSolicitud.user,
-                    nombreEmpresa: this.jsonSolicitud.nombreEmpresa
-                  }
-                  console.log(Json)
-                  axios.put("https://localhost:7274/api/Solicitud/UpdateSolicitud", Json)
+                console.log(this.jsonSolicitud)
+                if(this.jsonSolicitud.rolseleccionado == null){
+                  this.jsonSolicitud.rolseleccionado = ""
+                }
+                console.log(this.jsonSolicitud)
+                  axios.put("https://localhost:7274/api/Solicitud/UpdateSolicitud", this.jsonSolicitud)
                   .then(response=>{
                     if(response.status == 200)
                       alert("Solicitud Actualizada con Exito")

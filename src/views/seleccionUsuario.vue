@@ -57,8 +57,6 @@ export default{
                         console.log(response.data.user)
                         this.entradasJSON = response.data;
                         console.log("Comenzado validacion")
-                        console.log(this.entradasJSON.user)
-                        console.log(this)
                         if(this.entradasJSON.id != null){
                             this.$store.state.id_usuario = this.entradasJSON.id;
                             this.$store.state.username = this.entradasJSON.user;
@@ -84,38 +82,42 @@ export default{
                 console.log(this)
               
             },
-        GetUser(){
-            const jsonPayload = this.parseJwt();
-            console.log(jsonPayload.email.toString())
-            axios.get("https://localhost:7151/api/User/ValidateUser/" + jsonPayload.email.toString())
-                .then(response=>{
-                    if(response.status == 200){
-                        console.log(response.data.user)
-                        this.entradasJSON = response.data;
-                    } 
-                })
-                .catch(err =>{
-                  alert(err.data)
-                })
-        },
         RegisterMedico(){
             const userdata = this.parseJwt()
             const JsonRegister = {
+                id: "",
                 user: userdata.email.toString(),
+                password: "",
                 name: userdata.given_name.toString(),
                 lastname: userdata.family_name.toString(),
-                user_type: "1",
+                user_type: "2",
+                cuit_empresa: "",
                 rol: {
                     id: "4",
+                    rol: ""
                 }
             }
             axios.post("https://localhost:7151/api/User/RegisterUser", JsonRegister)
             .then(response=>{
                     if(response.status==200){
                         alert("registrado con exito!")
-                        router.replace('/homeM')
+                        axios.get("https://localhost:7151/api/User/ValidateUser/" + userdata.email.toString())
+                            .then(response=>{
+                            if(response.status == 200){
+                            console.log(response.data.user)
+                            this.entradasJSON = response.data;
+                            if(this.entradasJSON.id != null){
+                                this.$store.state.id_usuario = this.entradasJSON.id;
+                                this.$store.state.username = this.entradasJSON.user;
+                                this.$store.state.cuit_empresa = this.entradasJSON.cuit_empresa;
+                                this.$store.state.rol = this.entradasJSON.rol.rol;
+                                this.$store.state.user_type = this.entradasJSON.user_type;
+                                }
+                            router.replace('/homeM')
+                            }
+                        })
                     }
-            })
+                })
             .catch(err =>{
                 alert(err.data)
             })
@@ -123,20 +125,45 @@ export default{
         RegisterUsuarioEmpresa(){
               const userdata = this.parseJwt()
               const JsonRegister = {
+                id: "",
                 user: userdata.email.toString(),
+                password: "",
                 name: userdata.given_name.toString(),
                 lastname: userdata.family_name.toString(),
-                user_type: "2"
+                user_type: "1",
+                cuit_empresa: "",
+                rol: {
+                    id: "",
+                    rol: ""
+                }
               }
               axios.post("https://localhost:7151/api/User/RegisterUser", JsonRegister)
               .then(response=>{
                 if(response.status==200){
                         alert("registrado con exito!")
+                        axios.get("https://localhost:7151/api/User/ValidateUser/" + userdata.email.toString())
+                            .then(response=>{
+                            if(response.status == 200){
+                            console.log(response.data.user)
+                            this.entradasJSON = response.data;
+                            if(this.entradasJSON.id != null){
+                                this.$store.state.id_usuario = this.entradasJSON.id;
+                                this.$store.state.username = this.entradasJSON.user;
+                                this.$store.state.cuit_empresa = this.entradasJSON.cuit_empresa;
+                                this.$store.state.rol = this.entradasJSON.rol.rol;
+                                this.$store.state.user_type = this.entradasJSON.user_type;
+                                }
+                            router.replace('/homeM')
+                            }
+                        })
                         router.replace('/seleccionEmpresaUser')
                     }
               })
               .catch(err =>{
                 alert(err.data)
+              })
+              .finally(data =>{
+                //agregar guardado de datos en state
               })
             },
         parseJwt() {

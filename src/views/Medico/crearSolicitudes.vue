@@ -73,7 +73,7 @@ import router from '../../router';
             id_solicitud: "",
             cuit_empresa: null,
             id_usuario: null,
-            rolseleccionado: null,
+            rolseleccionado: "",
             tipo_Solicitud: {
               id: "1",
               tipo: "",
@@ -93,7 +93,8 @@ import router from '../../router';
     methods: {
             Solicitud(){
                 this.jsonSolicitud.id_usuario = this.$store.state.id_usuario;
-                this.jsonSolicitud.cuit_empresa = this.EmpresaSelect.toString()
+                this.jsonSolicitud.cuit_empresa = this.EmpresaSelect
+                console.log(this.jsonSolicitud)
                 axios.post("https://localhost:7274/api/Solicitud/RegisterSolicitud", this.jsonSolicitud)
                 .then(response=>{
                   if(response.status == 200)

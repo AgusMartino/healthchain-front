@@ -11,11 +11,13 @@
 
   <form class="form" v-if="validacionCuit">
       <v-text-field
-        v-model="jsonEmpresa.nombre_empresa"
+        disableb
+        v-model="this.jsonEmpresa.name"
       ></v-text-field>
   
       <v-text-field
-        v-model="jsonEmpresa.direccion_empresa"
+        disableb
+        v-model="this.jsonEmpresa.direccion"
       ></v-text-field>
 
       <v-select
@@ -29,15 +31,14 @@
 
       <v-text-field
         label="Motivo"
-        v-model="jsonSolicitud.descripcion"
+        v-model="this.jsonSolicitud.descripcion"
       ></v-text-field>
       <div>
         <v-btn
         class="me-4"
-        type="submit"
         @click="Solicitud()"
       >
-        submit
+        Enviar Solicitud
       </v-btn>
       </div>  
     </form>
@@ -48,37 +49,42 @@
     export default{
       data(){
         return{
+          userData: {},
           validacionCuit: false,
           cuit: null,
           Rolselect: null,
-          jsonEmpresa: {
-            nombre_empresa:"",
-            direccion_empresa: "",
-          },
+          jsonEmpresa: {},
           jsonRol: [
             {id: '1', Rol: 'Empleado Administrador'},
             {id: '2', Rol: 'Empleado Financiero'},
             {id: '3', Rol: 'Empleado Monitor'}
           ],
           jsonSolicitud:{
+            id_solicitud: "",
             cuit_empresa: null,
             id_usuario: null,
-            rolSolicitdado: null,
+            rolseleccionado: "",
             tipo_Solicitud: {
               id: "2",
+              tipo: "",
             },
             descripcion: null,
             estado: "1",
+            user: "",
+            nombreEmpresa: ""
           }
         }
         
       },
+    mounted(){
+      this.GetUser()
+    },
     methods: {
             Solicitud(){
-                const userdata = GetUser()
-                this.jsonSolicitud.id_usuario = userdata.id.toString()
-                this.jsonSolicitud.cuit_empresa = this.cuit.toString()
-                this.jsonSolicitud.rolSolicitdado = this.Rolselect.toString()
+                console.log(this.userData)
+                this.jsonSolicitud.id_usuario = this.userData.id
+                this.jsonSolicitud.cuit_empresa = this.cuit
+                this.jsonSolicitud.rolseleccionado = this.Rolselect
                 axios.post("https://localhost:7274/api/Solicitud/RegisterSolicitud", this.jsonSolicitud)
                 .then(response=>{
                   if(response.status == 200)
@@ -90,38 +96,37 @@
                 })
               },
             GetUser(){
-              const jsonPayload = decodeToken();
-              const userData = [];
-              axios.get("https://localhost:7151/api/User/ValidateUser/" + jsonPayload.email.toString())
+              const jsonPayload = this.parseJwt();
+              console.log(jsonPayload)
+              axios.get("https://localhost:7151/api/User/ValidateUser/" + jsonPayload.email)
                       .then(response=>{
-                        this.userData = response.data;
+                        if(response.status == 200){
+                          this.userData = response.data
+                        }
                       })
                       .catch(err =>{
                         alert(err.data)
                       })
-              return userData;
             },
             GetEmpresa(){
-              val = false;
               if(this.cuit == null){
                 alert("Debe completar el cuit de la empresa a buscar")
               }
               else{
                 axios.get("https://localhost:7227/api/Empresa/GetOneEmpresa/" + this.cuit.toString())
                 .then(response=>{
-                  this.jsonEmpresa = response.data;
                   if(response.status==200){
-                    val = true;
-                  }else{
-                    val = false;
+                    this.jsonEmpresa = response.data;
+                    if(response.data.cuit == null){
+                      this.validacionCuit = false;
+                      alert("Empresa no encontrada, intentelo de nuevo")
+                    }else if(response.data.cuit != null){
+                      this.validacionCuit = true;
+                    }
                   }
                 })
                 .catch(err =>{
                   alert(err.data)
-                  val = false;
-                })
-                .finally(data =>{
-                  this.validacionCuit = val;
                 })
               }
             },
