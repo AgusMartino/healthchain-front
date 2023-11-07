@@ -26,6 +26,7 @@ import loginBO from '../views/Panel/LoginBO.vue'
 import crearUsuarioAdminEmpresaBO from '../views/Panel/crearUsuarioAdminEmpresa.vue'
 import gestorEmpresaBO from '../views/Panel/gestorEmpresa.vue'
 import gestorUsuariosAdminBO from '../views/Panel/gestorUsuariosAdmin.vue'
+import listadoBitacora from '../views/Panel/listadoBitacora.vue'
 
 const routes = [
   {
@@ -159,6 +160,11 @@ const routes = [
     path: '/crearUsuarioAdminEmpresaBO',
     name: 'crearUsuarioAdminEmpresaBO',
     component: crearUsuarioAdminEmpresaBO,
+  },
+  {
+    path: '/listadoBitacora',
+    name: 'listadoBitacora',
+    component: listadoBitacora,
   },
 ]
 

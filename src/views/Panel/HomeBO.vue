@@ -36,7 +36,7 @@
                 <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
                     <v-card class="mx-auto" max-width="344" variant="outlined">
                         <v-card-actions>
-                        <v-btn variant="outlined">Bitacora</v-btn>
+                        <v-btn variant="outlined" to="/listadoBitacora">Bitacora</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
