@@ -47,6 +47,23 @@ import axios from 'axios'
     },
     methods:{
         GetEmpresasAsociadas(){
+          const BitacoraRequest={
+            id_usuario: this.$store.state.id_usuario,
+            name: "",
+            lastname: "",
+            description: "Se obtienen todas las empresas relacionadas con el usuario:" + this.$store.state.id_usuario,
+            type: "INFO",
+            creation_date: "",
+          }
+          axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                        .then(response=>{
+                            if(response.status == 200){
+                                this.jsonSolicitud = response.data;
+                                    Console.log('bitacora ok')
+                            }})
+                        .catch(err =>{
+                          Console.log(err.data)
+                        })
             const username = this.$store.state.id_usuario
             axios.get("https://localhost:7227/api/Empresa/GetAllEmpresaAsociadasMedico/" + username)
                       .then(response=>{

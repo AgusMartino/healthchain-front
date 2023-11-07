@@ -42,10 +42,44 @@ export default createStore({
           localStorage.setItem('expires_at', expiresAt);  
           console.log(authResult.accessToken)
           console.log(authResult.idToken)
-          console.log(expiresAt)
+          console.log(expiresAt);
+          const BitacoraRequest = {
+            id_usuario: "084757d9-cbf3-4098-9374-b9e6563dcfb3",
+            name: "",
+            lastname: "",
+            description: "Se realiza un login con Auth0 con el token:" + authResult.idToken,
+            type: "INFO",
+            creation_date: "",
+          }
+          axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                        .then(response=>{
+                            if(response.status == 200){
+                                this.jsonSolicitud = response.data;
+                                    Console.log('bitacora ok')
+                            }})
+                        .catch(err =>{
+                          Console.log(err.data)
+                        })
           router.replace('/seleccionUsuario')
         } 
         else if (err) {
+          const BitacoraRequestError = {
+            id_usuario: "084757d9-cbf3-4098-9374-b9e6563dcfb3",
+            name: "",
+            lastname: "",
+            description: "Se realiza un login con Auth0 y genero un login failed. Error #KJN838" + err,
+            type: "ERROR",
+            creation_date: "",
+          }
+          axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequestError)
+                        .then(response=>{
+                            if(response.status == 200){
+                                this.jsonSolicitud = response.data;
+                                    Console.log('bitacora ok')
+                            }})
+                        .catch(err =>{
+                          Console.log(err.data)
+                        })
           alert('login failed. Error #KJN838');
           router.replace('/login');
           console.log(err);

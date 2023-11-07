@@ -58,7 +58,24 @@ import axios from 'axios'
         this.GetUsuarios()
     },
     methods:{
-        GetUsuarios(){            
+        GetUsuarios(){
+          const BitacoraRequest={
+            id_usuario: this.$store.state.id_usuario,
+            name: "",
+            lastname: "",
+            description: "Se obtine el listado de usarios Empresa relacionados con la empresa con cuit:" + this.$store.state.cuit_empresa,
+            type: "INFO",
+            creation_date: "",
+          }
+          axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                        .then(response=>{
+                            if(response.status == 200){
+                                this.jsonSolicitud = response.data;
+                                    Console.log('bitacora ok')
+                            }})
+                        .catch(err =>{
+                          Console.log(err.data)
+                        })            
             axios.get("https://localhost:7151/api/User/GetUsersEmpresas/" + this.$store.state.cuit_empresa)
                       .then(response=>{
                         this.JsonMapper = response.data;

@@ -83,6 +83,23 @@ export default{
               
             },
         RegisterMedico(){
+            const BitacoraRequest = {
+                id_usuario: "084757d9-cbf3-4098-9374-b9e6563dcfb3",
+                name: "",
+                lastname: "",
+                description: "Se realiza un registro de medico",
+                type: "INFO",
+                creation_date: "",
+            }
+            axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                        .then(response=>{
+                            if(response.status == 200){
+                                this.jsonSolicitud = response.data;
+                                    Console.log('bitacora ok')
+                            }})
+                        .catch(err =>{
+                          Console.log(err.data)
+                        })
             const userdata = this.parseJwt()
             const JsonRegister = {
                 id: "",
@@ -123,8 +140,25 @@ export default{
             })
         },
         RegisterUsuarioEmpresa(){
-              const userdata = this.parseJwt()
-              const JsonRegister = {
+            const BitacoraRequest = {
+                id_usuario: "084757d9-cbf3-4098-9374-b9e6563dcfb3",
+                name: "",
+                lastname: "",
+                description: "Se realiza un registro de usario de empresa",
+                type: "INFO",
+                creation_date: ""
+            }
+            axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                        .then(response=>{
+                            if(response.status == 200){
+                                this.jsonSolicitud = response.data;
+                                    Console.log('bitacora ok')
+                            }})
+                        .catch(err =>{
+                          Console.log(err.data)
+                        })
+            const userdata = this.parseJwt()
+            const JsonRegister = {
                 id: "",
                 user: userdata.email.toString(),
                 password: "",

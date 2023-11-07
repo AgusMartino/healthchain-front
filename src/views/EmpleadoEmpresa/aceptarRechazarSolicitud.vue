@@ -93,6 +93,23 @@
       },
       methods: {
               ModifySolicitud(){
+                const BitacoraRequest={
+                  id_usuario: this.$store.state.id_usuario,
+                  name: "",
+                  lastname: "",
+                  description: "Se modifica la solicitud con el id de estado:" + this.jsonSolicitud.estado,
+                  type: "INFO",
+                  creation_date: "",
+                }
+                axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                              .then(response=>{
+                                  if(response.status == 200){
+                                      this.jsonSolicitud = response.data;
+                                          Console.log('bitacora ok')
+                                  }})
+                              .catch(err =>{
+                                Console.log(err.data)
+                              })
                 console.log(this.jsonSolicitud)
                 if(this.jsonSolicitud.rolseleccionado == null){
                   this.jsonSolicitud.rolseleccionado = ""

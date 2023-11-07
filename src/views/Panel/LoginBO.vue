@@ -53,6 +53,23 @@ export default{
     },
     methods: {
             login(){
+              const BitacoraRequest={
+                id_usuario: "084757d9-cbf3-4098-9374-b9e6563dcfb3",
+                name: "",
+                lastname: "",
+                description: "Se realiza login del usuario:" + this.loginPostBody.usuario,
+                type: "INFO",
+                creation_date: "",
+              }
+              axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                            .then(response=>{
+                                if(response.status == 200){
+                                    this.jsonSolicitud = response.data;
+                                        Console.log('bitacora ok')
+                                }})
+                            .catch(err =>{
+                              Console.log(err.data)
+                            })
               console.log(this.loginPostBody.password)
               console.log(this.loginPostBody.usuario)
                 axios.post("https://localhost:7151/api/User/LoginUserBO", this.loginPostBody)

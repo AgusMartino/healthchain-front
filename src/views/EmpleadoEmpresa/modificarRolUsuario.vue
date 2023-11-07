@@ -72,6 +72,23 @@
       },
       methods: {
               ModifyUsuario(){
+                  const BitacoraRequest={
+                    id_usuario: this.$store.state.id_usuario,
+                    name: "",
+                    lastname: "",
+                    description: "se modifico el rol del usuario:" + this.userData.id,
+                    type: "INFO",
+                    creation_date: "",
+                  }
+                  axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                                .then(response=>{
+                                    if(response.status == 200){
+                                        this.jsonSolicitud = response.data;
+                                            Console.log('bitacora ok')
+                                    }})
+                                .catch(err =>{
+                                  Console.log(err.data)
+                                })
                   axios.put("https://localhost:7151/api/User/UpdateUser", this.userData)
                   .then(response=>{
                     if(response.status == 200)

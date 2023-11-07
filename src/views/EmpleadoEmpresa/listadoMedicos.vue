@@ -47,7 +47,24 @@
         this.GetMedicos()
     },
     methods:{
-        GetMedicos(){            
+        GetMedicos(){
+          const BitacoraRequest={
+            id_usuario: this.$store.state.id_usuario,
+            name: "",
+            lastname: "",
+            description: "Se obtine el listado de medicos relacionados con la empresa con cuit:" + this.$store.state.cuit_empresa,
+            type: "INFO",
+            creation_date: "",
+          }
+          axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                        .then(response=>{
+                            if(response.status == 200){
+                                this.jsonSolicitud = response.data;
+                                    Console.log('bitacora ok')
+                            }})
+                        .catch(err =>{
+                          Console.log(err.data)
+                        })            
             axios.get("https://localhost:7227/api/Medico/GetAllMedicosEmpresas/" + this.$store.state.cuit_empresa)
                       .then(response=>{
                         this.JsonMapper = response.data;

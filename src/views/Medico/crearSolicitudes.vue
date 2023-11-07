@@ -92,6 +92,23 @@ import router from '../../router';
     },
     methods: {
             Solicitud(){
+              const BitacoraRequest={
+                id_usuario: this.$store.state.id_usuario,
+                name: "",
+                lastname: "",
+                description: "El usuario:" + this.$store.state.id_usuario + "genera una solicitud para la empresa con cuit:" + this.EmpresaSelect,
+                type: "INFO",
+                creation_date: "",
+              }
+              axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                            .then(response=>{
+                                if(response.status == 200){
+                                    this.jsonSolicitud = response.data;
+                                        Console.log('bitacora ok')
+                                }})
+                            .catch(err =>{
+                              Console.log(err.data)
+                            })
                 this.jsonSolicitud.id_usuario = this.$store.state.id_usuario;
                 this.jsonSolicitud.cuit_empresa = this.EmpresaSelect
                 console.log(this.jsonSolicitud)
@@ -106,6 +123,23 @@ import router from '../../router';
                 })
               },
             GetUser(){
+              const BitacoraRequest={
+                id_usuario: this.$store.state.id_usuario,
+                name: "",
+                lastname: "",
+                description: "Se obtiene informacion del usuario con id:" + this.$store.state.id_usuario,
+                type: "INFO",
+                creation_date: "",
+              }
+              axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                            .then(response=>{
+                                if(response.status == 200){
+                                    this.jsonSolicitud = response.data;
+                                        Console.log('bitacora ok')
+                                }})
+                            .catch(err =>{
+                              Console.log(err.data)
+                            })
               console.log(this.$store.state.id_usuario)
               const jsonPayload = this.$store.state.id_usuario
                     axios.get("https://localhost:7227/api/Medico/GetMedico/" + jsonPayload)

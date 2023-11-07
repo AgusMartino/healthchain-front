@@ -44,6 +44,23 @@
       },
       methods:{
         PostEmpresa(){
+          const BitacoraRequest={
+            id_usuario: this.$store.state.id_usuario,
+            name: "",
+            lastname: "",
+            description: "Se crea la empresa con cuit:" + this.PostEmpresaBody.cuit,
+            type: "INFO",
+            creation_date: "",
+          }
+          axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                        .then(response=>{
+                            if(response.status == 200){
+                                this.jsonSolicitud = response.data;
+                                    Console.log('bitacora ok')
+                            }})
+                        .catch(err =>{
+                          Console.log(err.data)
+                        })
           axios.post("https://localhost:7227/api/Empresa/RegisterEmpresa", this.PostEmpresaBody)
             .then(response=>{
                     if(response.status==200){

@@ -58,6 +58,23 @@
         },
       methods:{
         PostUsuario(){
+          const BitacoraRequest={
+            id_usuario: this.$store.state.id_usuario,
+            name: "",
+            lastname: "",
+            description: "Se crea el usuario Admin de la empresa con usuario:" + this.PostUsuarioBody.user,
+            type: "INFO",
+            creation_date: "",
+          }
+          axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                        .then(response=>{
+                            if(response.status == 200){
+                                this.jsonSolicitud = response.data;
+                                    Console.log('bitacora ok')
+                            }})
+                        .catch(err =>{
+                          Console.log(err.data)
+                        })
           axios.post("https://localhost:7151/api/User/RegisterUser", this.PostUsuarioBody)
             .then(response=>{
                     if(response.status==200){

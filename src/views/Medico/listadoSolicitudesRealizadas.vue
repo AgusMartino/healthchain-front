@@ -63,6 +63,23 @@ import axios from 'axios'
     },
     methods:{
         GetSolicitudes(){
+          const BitacoraRequest={
+            id_usuario: this.$store.state.id_usuario,
+            name: "",
+            lastname: "",
+            description: "El usuario:" + this.$store.state.id_usuario + "Esta obteniendo todas las solicitudes generadas por el mismo",
+            type: "INFO",
+            creation_date: "",
+          }
+          axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                        .then(response=>{
+                            if(response.status == 200){
+                                this.jsonSolicitud = response.data;
+                                    Console.log('bitacora ok')
+                            }})
+                        .catch(err =>{
+                          Console.log(err.data)
+                        })
             const username = this.$store.state.id_usuario;
             axios.get("https://localhost:7274/api/Solicitud/GetAllSolicitudesUsuario/" + username)
                       .then(response=>{
