@@ -70,7 +70,6 @@ import axios from 'axios'
           axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
-                                this.jsonSolicitud = response.data;
                                     Console.log('bitacora ok')
                             }})
                         .catch(err =>{

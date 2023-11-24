@@ -103,16 +103,15 @@ import router from '../../router';
               axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                             .then(response=>{
                                 if(response.status == 200){
-                                    this.jsonSolicitud = response.data;
                                         Console.log('bitacora ok')
                                 }})
                             .catch(err =>{
                               Console.log(err.data)
                             })
-                this.jsonSolicitud.id_usuario = this.$store.state.id_usuario;
-                this.jsonSolicitud.cuit_empresa = this.EmpresaSelect
-                console.log(this.jsonSolicitud)
-                axios.post("https://localhost:7274/api/Solicitud/RegisterSolicitud", this.jsonSolicitud)
+              this.jsonSolicitud.id_usuario = this.$store.state.id_usuario;
+              this.jsonSolicitud.cuit_empresa = this.EmpresaSelect
+              console.log(this.jsonSolicitud)
+              axios.post("https://localhost:7274/api/Solicitud/RegisterSolicitud", this.jsonSolicitud)
                 .then(response=>{
                   if(response.status == 200)
                     alert("Solicitud enviado con exito")
@@ -134,7 +133,6 @@ import router from '../../router';
               axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                             .then(response=>{
                                 if(response.status == 200){
-                                    this.jsonSolicitud = response.data;
                                         Console.log('bitacora ok')
                                 }})
                             .catch(err =>{
@@ -142,14 +140,14 @@ import router from '../../router';
                             })
               console.log(this.$store.state.id_usuario)
               const jsonPayload = this.$store.state.id_usuario
-                    axios.get("https://localhost:7227/api/Medico/GetMedico/" + jsonPayload)
-                        .then(response=>{
-                          this.userData = response.data;
-                          console.log(this.userData)
-                        })
-                        .catch(err =>{
-                          alert(err.data)
-                        })
+              axios.get("https://localhost:7227/api/Medico/GetMedico/" + jsonPayload)
+                .then(response=>{
+                  this.userData = response.data;
+                  console.log(this.userData)
+                })
+                .catch(err =>{
+                  alert(err.data)
+                })
             },
             GetEmpresas(){
                 axios.get("https://localhost:7227/api/Empresa/GetAllEmpresa")

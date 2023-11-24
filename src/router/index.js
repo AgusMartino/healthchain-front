@@ -14,12 +14,21 @@ import modificarUsuarioEE from '../views/EmpleadoEmpresa/modificarRolUsuario.vue
 import gestorMedicosEE from '../views/EmpleadoEmpresa/gestorMedicos.vue'
 import gestorNFTEE from '../views/EmpleadoEmpresa/gestorNFT.vue'
 import gestorUsuariosEE from '../views/EmpleadoEmpresa/gestorUsuarios.vue'
+import listadoTransaccionesEmpleadoEmpresa from '../views/EmpleadoEmpresa/listadoTransaccionesEmpleadoEmpresa.vue'
+import NftsPropiedadEmpleadoEmpresa from '../views/EmpleadoEmpresa/NftsPropiedadEmpleadoEmpresa.vue'
+import comprarNFTEE from '../views/EmpleadoEmpresa/comprarNFT.vue'
+import listadosNFTsAcomprarEE from '../views/EmpleadoEmpresa/listadosNFTsAcomprar.vue'
+import transferirNFTEE from '../views/EmpleadoEmpresa/transferirNFT.vue'
+import crearNFTEE from '../views/EmpleadoEmpresa/crearNFT.vue'
 import HomeM from '../views/Medico/homeMedico.vue'
-import gestorNFTM from '../views/Medico/gestorNFT.vue'
 import gestorSolicitudesM from '../views/Medico/gestorSolicitudes.vue'
 import crearSolicitudesMedicoM from '../views/Medico/crearSolicitudes.vue'
 import listadoEmpresasAsociadasM from '../views/Medico/listadoEmpresasAsociadas.vue'
 import listadoSolicitudesRealizadasM from '../views/Medico/listadoSolicitudesRealizadas.vue'
+import listadoTransaccionesMedico from '../views/Medico/listadoTransaccionesMedico.vue'
+import NftsPropiedadMedico from '../views/Medico/NftsPropiedadMedico.vue'
+import publicarNFTMedico from '../views/Medico/NftsPropiedadMedico.vue'
+import modificarNFTMedico from '../views/Medico/modificarNFT.vue'
 import HomeBO from '../views/Panel/HomeBO.vue'
 import CrearEmpresaBO from '../views/Panel/CrearEmpresaBO.vue'
 import loginBO from '../views/Panel/LoginBO.vue'
@@ -27,6 +36,7 @@ import crearUsuarioAdminEmpresaBO from '../views/Panel/crearUsuarioAdminEmpresa.
 import gestorEmpresaBO from '../views/Panel/gestorEmpresa.vue'
 import gestorUsuariosAdminBO from '../views/Panel/gestorUsuariosAdmin.vue'
 import listadoBitacora from '../views/Panel/listadoBitacora.vue'
+import listadoTransaccionesBO from '../views/Panel/listadoTransaccionesBO.vue'
 
 const routes = [
   {
@@ -102,14 +112,40 @@ const routes = [
     props: true
   },
   {
+    path: '/listadoTransaccionesEE',
+    name: 'listadoTransaccionesEE',
+    component: listadoTransaccionesEmpleadoEmpresa,
+  },
+  {
+    path: '/NftsPropiedadEmpleadoEmpresa',
+    name: 'NftsPropiedadEmpleadoEmpresa',
+    component: NftsPropiedadEmpleadoEmpresa,
+  },
+  {
+    path: '/comprarNFTEE/:nft',
+    name: 'comprarNFTEE',
+    component: comprarNFTEE,
+    props: true
+  },
+  {
+    path: '/listadosNFTsAcomprarEE',
+    name: 'listadosNFTsAcomprarEE',
+    component: listadosNFTsAcomprarEE,
+  },
+  {
+    path: '/transferirNFTEE',
+    name: 'transferirNFTEE',
+    component: transferirNFTEE,
+  },
+  {
+    path: '/crearNFTEE',
+    name: 'crearNFTEE',
+    component: crearNFTEE,
+  },
+  {
     path: '/HomeM',
     name: 'HomeM',
     component: HomeM,
-  },
-  {
-    path: '/gestorNFTM',
-    name: 'gestorNFTM',
-    component: gestorNFTM,
   },
   {
     path: '/gestorSolicitudesM',
@@ -130,6 +166,28 @@ const routes = [
     path: '/listadoSolicitudesRealizadasM',
     name: 'listadoSolicitudesRealizadasM',
     component: listadoSolicitudesRealizadasM,
+  },
+  {
+    path: '/listadoTransaccionesM',
+    name: 'listadoTransaccionesM',
+    component: listadoTransaccionesMedico,
+  },
+  {
+    path: '/NftsPropiedadMedico',
+    name: 'NftsPropiedadMedico',
+    component: NftsPropiedadMedico,
+  },
+  {
+    path: '/publicarNFTMedico/:nft',
+    name: 'publicarNFTMedico',
+    component: publicarNFTMedico,
+    props: true
+  },
+  {
+    path: '/modificarNFTMedico/:nft',
+    name: 'modificarNFTMedico',
+    component: modificarNFTMedico,
+    props: true
   },
   {
     path: '/loginBO',
@@ -165,6 +223,11 @@ const routes = [
     path: '/listadoBitacora',
     name: 'listadoBitacora',
     component: listadoBitacora,
+  },
+  {
+    path: '/listadoTransaccionesBO',
+    name: 'listadoTransaccionesBO',
+    component: listadoTransaccionesBO,
   },
 ]
 
@@ -207,7 +270,5 @@ router.beforeEach((to,from,next)=>{
     next();
   }
 });
-
-
 
 export default router

@@ -24,7 +24,7 @@
                         </div>
                         <hr>
                         <v-card-actions>
-                        <v-btn variant="outlined" >Visualizar transacciones</v-btn>
+                        <v-btn variant="outlined" to="/listadoTransaccionesEE">Visualizar transacciones</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>

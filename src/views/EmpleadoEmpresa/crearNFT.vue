@@ -1,37 +1,40 @@
 <template>
-    <form @submit.prevent="submit" class="form">
+    <form class="form">
       <v-text-field
-        v-model="PostUsuarioBody.user"
-        label="Usuario"
+        v-model="PostNFTBody.tokenNFTid"
+        label="Identificador NFT (Se recomienda colocar el DNI del Paciente)"
+      ></v-text-field>
+  
+      <v-text-field
+        v-model="PostNFTBody.nombre_paciente"
+        label="Nombre del Paciente"
+      ></v-text-field>
+  
+      <v-text-field
+        v-model="PostNFTBody.apellido_paciente"
+        label="Apellido del Paciente"
       ></v-text-field>
 
       <v-text-field
-        v-model="PostUsuarioBody.name"
-        label="Nombre"
+        v-model="PostNFTBody.dni"
+        label="DNI del Paciente"
       ></v-text-field>
 
       <v-text-field
-        v-model="PostUsuarioBody.lastname"
-        label="Apellido"
+        v-model="PostNFTBody.cobertura"
+        label="Cobertura del Paciente"
       ></v-text-field>
-      
-      Cuit de la empresa:
-      <v-text-field
-        v-model="PostUsuarioBody.cuit_empresa"
-        label="Cuit"
-      ></v-text-field>
-
       <div>
         <v-btn
         class="me-4"
-        @click="PostUsuario()"
-      >
-        Crear usuario Admin
-      </v-btn>
-  
-      <v-btn @click="LimpiarCampos()">
-        Limpiar campos
-      </v-btn>
+        @click="PostNFT()"
+        >
+        Crear NFT
+        </v-btn>
+
+        <v-btn @click="LimpiarCampos()">
+          Limpiar campos
+        </v-btn>
       </div>  
       
     </form>
@@ -41,28 +44,28 @@
     export default{
       data(){
         return {
-            PostUsuarioBody: {
-              id: "",
-              password: "",
-              user: "",
-              name: "",
-              lastname: "",
-              cuit_empresa: "",
-              user_type: "1",
-              rol: {
-                id: "2",
-                rol: ""
-              }
+            PostNFTBody: {
+                id_user: this.$store.state.id_usuario,
+                id_user_Transfer: "",
+                tokenNFTid: "",
+                nombre_paciente: "",
+                apellido_paciente: "",
+                dni: "",
+                cobertura: "",
+                consulta: "",
+                patologia: "",
+                estado: "",
+                precio: ""
             }
-          }
-        },
+        }
+      },
       methods:{
-        PostUsuario(){
+        PostNFT(){
           const BitacoraRequest={
             id_usuario: this.$store.state.id_usuario,
             name: "",
             lastname: "",
-            description: "Se crea el usuario Admin de la empresa con usuario:" + this.PostUsuarioBody.user,
+            description: "Se crea el nft con id:" + this.PostNFTBody.tokenNFTid,
             type: "INFO",
             creation_date: "",
           }
@@ -74,7 +77,7 @@
                         .catch(err =>{
                           Console.log(err.data)
                         })
-          axios.post("https://localhost:7151/api/User/RegisterUser", this.PostUsuarioBody)
+          axios.post("https://localhost:7107/api/NFT/AddNFT", this.PostNFTBody)
             .then(response=>{
                     if(response.status==200){
                         alert("registrado con exito!")
@@ -88,14 +91,14 @@
             })
         },
         LimpiarCampos(){
-          this.PostUsuarioBody.user = ""
-          this.PostUsuarioBody.name = ""
-          this.PostUsuarioBody.lastname = ""
-          this.PostUsuarioBody.cuit_empresa = ""
+          this.PostNFTBody.tokenNFTid = ""
+          this.PostNFTBody.nombre_paciente = ""
+          this.PostNFTBody.apellido_paciente = ""
+          this.PostNFTBody.dni = ""
+          this.PostNFTBody.cobertura = ""
         }
       }
     }
-   
   </script>
   <style>
     .form{

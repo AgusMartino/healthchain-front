@@ -52,8 +52,8 @@
                 </v-menu>
             </v-flex>
         </v-layout>
-        <v-btn @click="GetBitacoras()">
-          Obtener Bitacoras
+        <v-btn @click="GetTransacciones()">
+          Obtener Transacciones
         </v-btn>
     </div>
     <div v-if="validacionFechas">
@@ -61,32 +61,36 @@
         <thead>
             <tr>
             <th class="text-left">
-                Nombre
+                Identificador EtherScan
             </th>
             <th class="text-left">
-                Apellido
+                Identificador Token
             </th>
             <th class="text-left">
-                Descripcion
+                Nombre de Usuario
             </th>
             <th class="text-left">
-                Tipo de bitacora
+                Billetera Origen
             </th>
             <th class="text-left">
-                Fecha de bitacora
+                Billetera Destino
+            </th>
+            <th class="text-left">
+                Fecha de Transaccion
             </th>
             </tr>
         </thead>
         <tbody>
             <tr
             v-for="item in this.JsonMapper"
-            :key="item.id_solicitud"
+            :key="item.id_etherscan"
             >
-            <td>{{ item.cuit_empresa }}</td>
-            <td>{{ item.nombreEmpresa }}</td>
-            <td>{{ item.descripcion }}</td>
-            <td>{{ item.fecha_creacion }}</td>
-            <td>{{ item.estado }}</td>
+            <td>{{ item.id_etherscan }}</td>
+            <td>{{ item.tokenIdNFT }}</td>
+            <td>{{ item.usuario }}</td>
+            <td>{{ item.billetera_origen }}</td>
+            <td>{{ item.billetera_destino }}</td>
+            <td>{{ item.fecha_transaccion }}</td>
             </tr>
         </tbody>
         </v-table>
@@ -102,27 +106,28 @@ import axios from 'axios'
         fecha_fin: "",
         JsonMapper:[
             {
-                id_usuario: "string",
-                name: "string",
-                lastname: "string",
-                description: "string",
-                type: "string",
-                creation_date: "2023-09-07T02:37:36.502Z"
+                id_etherscan: "string",
+                tokenIdNFT: "string",
+                usuario: "string",
+                billetera_origen: "string",
+                billetera_destino: "string",
+                fecha_transaccion: "string"
             }
         ],
         JsonFechas:{
             fecha_de_incio:"",
-            fecha_de_fin:""
+            fecha_de_fin:"",
+            user:""
         }
       }
     },
     methods:{
-        GetBitacoras(){
+        GetTransacciones(){
           const BitacoraRequest={
             id_usuario: this.$store.state.id_usuario,
             name: "",
             lastname: "",
-            description: "El usuario:" + this.$store.state.id_usuario + "Esta obteniendo la bitacora de entre las fechas:" + this.fecha_incio + "y" + this.fecha_fin,
+            description: "El usuario:" + this.$store.state.id_usuario + "Esta obteniendo las transacciones de entre las fechas:" + this.fecha_incio + "y" + this.fecha_fin,
             type: "INFO",
             creation_date: "",
           }
@@ -134,7 +139,7 @@ import axios from 'axios'
                         .catch(err =>{
                           Console.log(err.data)
                         })
-          axios.get("https://localhost:7182/api/Bitacora/GetBitacora", this.JsonFechas)
+          axios.post("https://localhost:7107/api/Transaccion/getListTransaccionFechas", this.JsonFechas)
                         .then(response=>{
                             this.JsonMapper = response.data;
                         })

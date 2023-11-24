@@ -58,14 +58,13 @@ import axios from 'axios'
           axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
-                                this.jsonSolicitud = response.data;
                                     Console.log('bitacora ok')
                             }})
                         .catch(err =>{
                           Console.log(err.data)
                         })
-            const username = this.$store.state.id_usuario
-            axios.get("https://localhost:7227/api/Empresa/GetAllEmpresaAsociadasMedico/" + username)
+          const username = this.$store.state.id_usuario
+          axios.get("https://localhost:7227/api/Empresa/GetAllEmpresaAsociadasMedico/" + username)
                       .then(response=>{
                         this.JsonMapper = response.data;
                       })
