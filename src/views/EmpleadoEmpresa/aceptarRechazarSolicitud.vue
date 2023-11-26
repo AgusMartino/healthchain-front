@@ -101,7 +101,7 @@
                   type: "INFO",
                   creation_date: "",
                 }
-                axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                               .then(response=>{
                                   if(response.status == 200){
                                           console.log('bitacora ok')
@@ -114,7 +114,7 @@
                   this.jsonSolicitud.rolseleccionado = ""
                 }
                 console.log(this.jsonSolicitud)
-                  axios.put("https://localhost:7274/api/Solicitud/UpdateSolicitud", this.jsonSolicitud)
+                  axios.put("https://healthchain-api-solicitudes-b793d42c9fb5.herokuapp.com/api/Solicitud/UpdateSolicitud", this.jsonSolicitud)
                   .then(response=>{
                     if(response.status == 200)
                       alert("Solicitud Actualizada con Exito")
@@ -126,13 +126,13 @@
                 GetSolicitud(){
                 console.log(this.user)
                 console.log(this.jsonSolicitudrequest)
-                axios.post("https://localhost:7274/api/Solicitud/GetOneSolicitud", this.jsonSolicitudrequest)
+                axios.post("https://healthchain-api-solicitudes-b793d42c9fb5.herokuapp.com/api/Solicitud/GetOneSolicitud", this.jsonSolicitudrequest)
                         .then(response=>{
                             if(response.status == 200){
                                 this.jsonSolicitud = response.data;
                                 if(this.jsonSolicitud.tipo_Solicitud.id = "1"){
                                   const jsonPayload = this.jsonSolicitud.id_usuario
-                                  axios.get("https://localhost:7227/api/Medico/GetMedico/" + jsonPayload)
+                                  axios.get("https://healtchain-api-abms-4fd21ff66375.herokuapp.com/api/Medico/GetMedico/" + jsonPayload)
                                       .then(response=>{
                                         if(response.status == 200){
                                           this.userData = response.data;
@@ -143,7 +143,7 @@
                                       })
                                 }else if(this.jsonSolicitud.tipo_Solicitud.id = "2"){
                                   const jsonPayload = this.jsonSolicitud.id_usuario
-                                  axios.get("https://localhost:7151/api/User/GetUser/" + jsonPayload)
+                                  axios.get("https://healthchain-api-usuarios-9e18a4d4a113.herokuapp.com/api/User/GetUser/" + jsonPayload)
                                       .then(response=>{
                                         if(response.status == 200){
                                         this.userData.nombre = response.data.name;

@@ -44,7 +44,7 @@
                     type: "INFO",
                     creation_date: "",
                   }
-                  axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                  axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                           .then(response=>{
                               if(response.status == 200){
                                       console.log('bitacora ok')
@@ -55,7 +55,7 @@
                     console.log(this.Medicos)
                     this.Medicos.especialidad = this.especialidadSelect
                     if(this.especialidadSelect != ""){
-                    axios.post("https://localhost:7227/api/Medico/AddEspecialidad", this.Medicos)
+                    axios.post("https://healtchain-api-abms-4fd21ff66375.herokuapp.com/api/Medico/AddEspecialidad", this.Medicos)
                         .then(response=>{
                             if(response.status == 200)
                             alert("Se registro la especialidad")

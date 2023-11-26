@@ -53,7 +53,7 @@
             type: "INFO",
             creation_date: "",
           }
-          axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+          axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
                                     console.log('bitacora ok')
@@ -61,7 +61,7 @@
                         .catch(err =>{
                           console.log(err.data)
                         })
-          axios.post("https://localhost:7227/api/Empresa/RegisterEmpresa", this.PostEmpresaBody)
+          axios.post("https://healtchain-api-abms-4fd21ff66375.herokuapp.com/api/Empresa/RegisterEmpresa", this.PostEmpresaBody)
             .then(response=>{
                     if(response.status==200){
                         alert("registrado con exito!")

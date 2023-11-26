@@ -52,7 +52,7 @@ export default createStore({
             type: "INFO",
             creation_date: "",
           }
-          axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+          axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
                                 this.jsonSolicitud = response.data;
@@ -73,7 +73,7 @@ export default createStore({
             type: "ERROR",
             creation_date: "",
           }
-          axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequestError)
+          axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequestError)
                         .then(response=>{
                             if(response.status == 200){
                                 this.jsonSolicitud = response.data;

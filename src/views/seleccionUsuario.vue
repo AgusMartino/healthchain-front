@@ -51,7 +51,7 @@ export default{
         validateUser(){
               const jsonPayload = this.parseJwt();
               console.log(jsonPayload.email.toString())
-              axios.get("https://localhost:7151/api/User/ValidateUser/" + jsonPayload.email.toString())
+              axios.get("https://healthchain-api-usuarios-9e18a4d4a113.herokuapp.com/api/User/ValidateUser/" + jsonPayload.email.toString())
                 .then(response=>{
                     if(response.status == 200){
                         console.log(response.data.user)
@@ -92,7 +92,7 @@ export default{
                 type: "INFO",
                 creation_date: "",
             }
-            axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+            axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
                                     console.log('bitacora ok')
@@ -114,11 +114,11 @@ export default{
                     rol: ""
                 }
             }
-            axios.post("https://localhost:7151/api/User/RegisterUser", JsonRegister)
+            axios.post("https://healthchain-api-usuarios-9e18a4d4a113.herokuapp.com/api/User/RegisterUser", JsonRegister)
             .then(response=>{
                     if(response.status==200){
                         alert("registrado con exito!")
-                        axios.get("https://localhost:7151/api/User/ValidateUser/" + userdata.email.toString())
+                        axios.get("https://healthchain-api-usuarios-9e18a4d4a113.herokuapp.com/api/User/ValidateUser/" + userdata.email.toString())
                             .then(response=>{
                             if(response.status == 200){
                             console.log(response.data.user)
@@ -149,7 +149,7 @@ export default{
                 type: "INFO",
                 creation_date: ""
             }
-            axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+            axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
                                 this.jsonSolicitud = response.data;
@@ -172,11 +172,11 @@ export default{
                     rol: ""
                 }
               }
-              axios.post("https://localhost:7151/api/User/RegisterUser", JsonRegister)
+              axios.post("https://healthchain-api-usuarios-9e18a4d4a113.herokuapp.com/api/User/RegisterUser", JsonRegister)
               .then(response=>{
                 if(response.status==200){
                         alert("registrado con exito!")
-                        axios.get("https://localhost:7151/api/User/ValidateUser/" + userdata.email.toString())
+                        axios.get("https://healthchain-api-usuarios-9e18a4d4a113.herokuapp.com/api/User/ValidateUser/" + userdata.email.toString())
                             .then(response=>{
                             if(response.status == 200){
                             console.log(response.data.user)

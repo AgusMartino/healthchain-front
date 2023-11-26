@@ -101,7 +101,7 @@ import { Alert } from 'bootstrap'
             type: "INFO",
             creation_date: "",
           }
-          axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+          axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
                                     console.log('bitacora ok')
@@ -111,7 +111,7 @@ import { Alert } from 'bootstrap'
                         })
           this.JsonFechas.user = this.$store.state.id_usuario,
           console.log(this.JsonFechas)
-          axios.post("https://localhost:7107/api/Transaccion/getListTransaccionFechasCompany", this.JsonFechas)
+          axios.post("https://healthchain-api-blockchain-02c3b0c377c2.herokuapp.com/api/Transaccion/getListTransaccionFechasCompany", this.JsonFechas)
                         .then(response=>{
                             if(response.status == 200){
                                 this.JsonMapper = response.data;

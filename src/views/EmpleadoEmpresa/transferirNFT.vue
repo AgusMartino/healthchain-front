@@ -92,7 +92,7 @@
                     type: "INFO",
                     creation_date: "",
                   }
-                  axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                  axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                           .then(response=>{
                               if(response.status == 200){
                                       console.log('bitacora ok')
@@ -104,7 +104,7 @@
                   this.PostNFTBody.id_user = this.$store.state.id_usuario,
                   console.log(this.PostNFTBody)
                   if(this.PostNFTBody.id_user_Transfer != ""){
-                    axios.post("https://localhost:7107/api/NFT/TransaferNFT", this.PostNFTBody)
+                    axios.post("https://healthchain-api-blockchain-02c3b0c377c2.herokuapp.com/api/NFT/TransaferNFT", this.PostNFTBody)
                         .then(response=>{
                             if(response.status == 200)
                             alert("Validar transaccion en lista de transacciones!!")
@@ -128,7 +128,7 @@
                   type: "INFO",
                   creation_date: "",
                 }
-                axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                           .then(response=>{
                               if(response.status == 200){
                                       console.log('bitacora ok')
@@ -136,7 +136,7 @@
                           .catch(err =>{
                             console.log(err.data)
                           })
-                axios.get("https://localhost:7227/api/Medico/GetAllMedicosEmpresas/" + this.$store.state.cuit_empresa)
+                axios.get("https://healtchain-api-abms-4fd21ff66375.herokuapp.com/api/Medico/GetAllMedicosEmpresas/" + this.$store.state.cuit_empresa)
                         .then(response=>{
                           if(response.status == 200){
                             this.Medicos = response.data
@@ -161,7 +161,7 @@
                     type: "INFO",
                     creation_date: "",
                   }
-                  axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                  axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                           .then(response=>{
                               if(response.status == 200){
                                       console.log('bitacora ok')
@@ -169,7 +169,7 @@
                           .catch(err =>{
                             console.log(err.data)
                           })
-                  axios.get("https://localhost:7107/api/NFT/getNFT/" + this.nft.toString())
+                  axios.get("https://healthchain-api-blockchain-02c3b0c377c2.herokuapp.com/api/NFT/getNFT/" + this.nft.toString())
                   .then(response=>{
                     if(response.status==200){
                       this.jsonEmpresa = response.data;

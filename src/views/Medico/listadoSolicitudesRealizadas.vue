@@ -72,7 +72,7 @@ import axios from 'axios'
             type: "INFO",
             creation_date: "",
           }
-          axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+          axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
                                     console.log('bitacora ok')
@@ -81,7 +81,7 @@ import axios from 'axios'
                           console.log(err.data)
                         })
             const username = this.$store.state.id_usuario;
-            axios.get("https://localhost:7274/api/Solicitud/GetAllSolicitudesUsuario/" + username)
+            axios.get("https://healthchain-api-solicitudes-b793d42c9fb5.herokuapp.com/api/Solicitud/GetAllSolicitudesUsuario/" + username)
                       .then(response=>{
                         this.JsonMapper = response.data;
                       })

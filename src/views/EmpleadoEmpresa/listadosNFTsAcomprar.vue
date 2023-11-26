@@ -84,7 +84,7 @@
             type: "INFO",
             creation_date: "",
           }
-          axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+          axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
                                     console.log('bitacora ok')
@@ -92,7 +92,7 @@
                         .catch(err =>{
                           console.log(err.data)
                         })            
-          axios.get("https://localhost:7107/api/NFT/GetNFTMarketplace/" + this.$store.state.id_usuario)
+          axios.get("https://healthchain-api-blockchain-02c3b0c377c2.herokuapp.com/api/NFT/GetNFTMarketplace/" + this.$store.state.id_usuario)
                       .then(response=>{
                         if(response.status == 200){
                         this.JsonMapper = response.data;

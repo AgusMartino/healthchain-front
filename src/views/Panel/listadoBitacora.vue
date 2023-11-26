@@ -94,7 +94,7 @@ import axios from 'axios'
             type: "INFO",
             creation_date: "",
           }
-          axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+          axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
                                     console.log('bitacora ok')
@@ -102,7 +102,7 @@ import axios from 'axios'
                         .catch(err =>{
                           console.log(err.data)
                         })
-          axios.post("https://localhost:7182/api/Bitacora/GetBitacora", this.JsonFechas)
+          axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/GetBitacora", this.JsonFechas)
                         .then(response=>{
                             if(response.status == 200){
                                 this.JsonMapper = response.data;

@@ -100,7 +100,7 @@ import router from '../../router';
                 type: "INFO",
                 creation_date: "",
               }
-              axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+              axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                             .then(response=>{
                                 if(response.status == 200){
                                         console.log('bitacora ok')
@@ -111,7 +111,7 @@ import router from '../../router';
               this.jsonSolicitud.id_usuario = this.$store.state.id_usuario;
               this.jsonSolicitud.cuit_empresa = this.EmpresaSelect
               console.log(this.jsonSolicitud)
-              axios.post("https://localhost:7274/api/Solicitud/RegisterSolicitud", this.jsonSolicitud)
+              axios.post("https://healthchain-api-solicitudes-b793d42c9fb5.herokuapp.com/api/Solicitud/RegisterSolicitud", this.jsonSolicitud)
                 .then(response=>{
                   if(response.status == 200)
                     alert("Solicitud enviado con exito")
@@ -122,7 +122,7 @@ import router from '../../router';
                 })
               },
             GetEmpresasAndUser(){
-                axios.get("https://localhost:7227/api/Empresa/GetAllEmpresa")
+                axios.get("https://healtchain-api-abms-4fd21ff66375.herokuapp.com/api/Empresa/GetAllEmpresa")
                   .then(response=>{
                     if(response.status==200){
                       this.jsonEmpresa = response.data;
@@ -140,7 +140,7 @@ import router from '../../router';
                   type: "INFO",
                   creation_date: "",
                 }
-                axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                             .then(response=>{
                                 if(response.status == 200){
                                         console.log('bitacora ok')
@@ -150,7 +150,7 @@ import router from '../../router';
                             })
                 console.log(this.$store.state.id_usuario)
                 const jsonPayload = this.$store.state.id_usuario
-                axios.get("https://localhost:7227/api/Medico/GetMedico/" + jsonPayload)
+                axios.get("https://healtchain-api-abms-4fd21ff66375.herokuapp.com/api/Medico/GetMedico/" + jsonPayload)
                   .then(response=>{
                     if(response.status == 200){
                     this.userData = response.data;

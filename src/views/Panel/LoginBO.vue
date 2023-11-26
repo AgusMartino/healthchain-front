@@ -62,7 +62,7 @@ export default{
                 type: "INFO",
                 creation_date: "",
               }
-              axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+              axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                             .then(response=>{
                                 if(response.status == 200){
                                         console.log('bitacora ok')
@@ -72,7 +72,7 @@ export default{
                             })
               console.log(this.loginPostBody.password)
               console.log(this.loginPostBody.usuario)
-                axios.post("https://localhost:7151/api/User/LoginUserBO", this.loginPostBody)
+                axios.post("https://healthchain-api-usuarios-9e18a4d4a113.herokuapp.com/api/User/LoginUserBO", this.loginPostBody)
                 .then(response=> {
                     if(response.status==200){
                       if(response.data.id == null){

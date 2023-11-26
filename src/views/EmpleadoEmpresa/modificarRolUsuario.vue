@@ -81,7 +81,7 @@
                     type: "INFO",
                     creation_date: "",
                   }
-                  axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
+                  axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                                 .then(response=>{
                                     if(response.status == 200){
                                             console.log('bitacora ok')
@@ -89,7 +89,7 @@
                                 .catch(err =>{
                                   console.log(err.data)
                                 })
-                  axios.put("https://localhost:7151/api/User/UpdateUser", this.userData)
+                  axios.put("https://healthchain-api-usuarios-9e18a4d4a113.herokuapp.com/api/User/UpdateUser", this.userData)
                   .then(response=>{
                     if(response.status == 200)
                       alert("Usuario Modificado con Exito")
@@ -100,7 +100,7 @@
                 },
                 GetUsuario(){
                     const jsonPayload = this.id_user
-                    axios.get("https://localhost:7151/api/User/GetUser/" + jsonPayload)
+                    axios.get("https://healthchain-api-usuarios-9e18a4d4a113.herokuapp.com/api/User/GetUser/" + jsonPayload)
                         .then(response=>{
                           this.userData = response.data;
                         })
