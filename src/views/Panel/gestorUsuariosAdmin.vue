@@ -18,7 +18,7 @@
 
             <div>
                 <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
-                    <v-card class="mx-auto" max-width="344" variant="outlined">
+                    <v-card class="mx-auto" max-width="500" variant="outlined">
                         <div class="pa-3">
                             Imagen button
                         </div>

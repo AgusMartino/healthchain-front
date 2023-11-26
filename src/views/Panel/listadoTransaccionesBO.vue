@@ -2,54 +2,22 @@
     <div>
         <v-layout row wrap>
             <v-flex xs12 sm6 md4>
-                <v-menu
-                    ref="menu"
-                    :close-on-content-click="false"
-                    :nudge-right="40"
-                    :return-value.sync="date"
-                    lazy
-                    transition="scale-transition"
-                    offset-y
-                    full-width
-                    min-width="290px"
-                >
-                    <template v-slot:activator="{ on }">
                     <v-text-field
-                        v-model="fecha_incio"
+                        v-model="this.JsonFechas.fechaInicio"
                         label="Seleccionar fecha de incio"
-                        prepend-icon="event"
-                        readonly
                         v-on="on"
+                        type="datetime-local"
                     ></v-text-field>
-                    </template>
-                    <v-date-picker v-model="fecha_incio" no-title scrollable>
-                    </v-date-picker>
-                </v-menu>
-            </v-flex>
+            </v-flex>                  
+        </v-layout>
+        <v-layout row wrap>
             <v-flex xs12 sm6 md4>
-                <v-menu
-                    ref="menu"
-                    :close-on-content-click="false"
-                    :nudge-right="40"
-                    :return-value.sync="date"
-                    lazy
-                    transition="scale-transition"
-                    offset-y
-                    full-width
-                    min-width="290px"
-                >
-                    <template v-slot:activator="{ on }">
                     <v-text-field
-                        v-model="fecha_fin"
+                        v-model="this.JsonFechas.fechaFin"
                         label="Seleccionar fecha de fin"
-                        prepend-icon="event"
-                        readonly
                         v-on="on"
+                        type="datetime-local"
                     ></v-text-field>
-                    </template>
-                    <v-date-picker v-model="fecha_fin" no-title scrollable>
-                    </v-date-picker>
-                </v-menu>
             </v-flex>
         </v-layout>
         <v-btn @click="GetTransacciones()">
@@ -115,8 +83,8 @@ import axios from 'axios'
             }
         ],
         JsonFechas:{
-            fecha_de_incio:"",
-            fecha_de_fin:"",
+            fechaInicio:"",
+            fechaFin:"",
             user:""
         }
       }
@@ -124,6 +92,7 @@ import axios from 'axios'
     methods:{
         GetTransacciones(){
           const BitacoraRequest={
+            id_bitacora: "",
             id_usuario: this.$store.state.id_usuario,
             name: "",
             lastname: "",
@@ -134,14 +103,17 @@ import axios from 'axios'
           axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
-                                    Console.log('bitacora ok')
+                                    console.log('bitacora ok')
                             }})
                         .catch(err =>{
-                          Console.log(err.data)
+                          console.log(err.data)
                         })
           axios.post("https://localhost:7107/api/Transaccion/getListTransaccionFechas", this.JsonFechas)
                         .then(response=>{
-                            this.JsonMapper = response.data;
+                            if(response.status == 200){
+                                this.JsonMapper = response.data;
+                                this.validacionFechas = true
+                            }
                         })
                         .catch(err =>{
                             alert(err.data)

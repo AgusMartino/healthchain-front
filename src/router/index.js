@@ -27,8 +27,9 @@ import listadoEmpresasAsociadasM from '../views/Medico/listadoEmpresasAsociadas.
 import listadoSolicitudesRealizadasM from '../views/Medico/listadoSolicitudesRealizadas.vue'
 import listadoTransaccionesMedico from '../views/Medico/listadoTransaccionesMedico.vue'
 import NftsPropiedadMedico from '../views/Medico/NftsPropiedadMedico.vue'
-import publicarNFTMedico from '../views/Medico/NftsPropiedadMedico.vue'
+import publicarNFTMedico from '../views/Medico/publicarNFT.vue'
 import modificarNFTMedico from '../views/Medico/modificarNFT.vue'
+import seleccionarTipoDeEspecialidad from '../views/Medico/seleccionarTipoDeEspecialidad.vue'
 import HomeBO from '../views/Panel/HomeBO.vue'
 import CrearEmpresaBO from '../views/Panel/CrearEmpresaBO.vue'
 import loginBO from '../views/Panel/LoginBO.vue'
@@ -37,6 +38,7 @@ import gestorEmpresaBO from '../views/Panel/gestorEmpresa.vue'
 import gestorUsuariosAdminBO from '../views/Panel/gestorUsuariosAdmin.vue'
 import listadoBitacora from '../views/Panel/listadoBitacora.vue'
 import listadoTransaccionesBO from '../views/Panel/listadoTransaccionesBO.vue'
+import listadoEmpresasBO from '../views/Panel/listadoEmpresasBO.vue'
 
 const routes = [
   {
@@ -190,6 +192,11 @@ const routes = [
     props: true
   },
   {
+    path: '/seleccionarTipoDeEspecialidad',
+    name: 'seleccionarTipoDeEspecialidad',
+    component: seleccionarTipoDeEspecialidad,
+  },
+  {
     path: '/loginBO',
     name: 'loginBO',
     component: loginBO,
@@ -229,6 +236,12 @@ const routes = [
     name: 'listadoTransaccionesBO',
     component: listadoTransaccionesBO,
   },
+  {
+    path: '/listadoEmpresasBO',
+    name: 'listadoEmpresasBO',
+    component: listadoEmpresasBO,
+  },
+  
 ]
 
 const router = createRouter({

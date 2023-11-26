@@ -49,7 +49,6 @@
   </template>
     <script>
   import axios from 'axios';
-  import router from '../../router';
       export default{
         props: {
           user: String
@@ -94,6 +93,7 @@
       methods: {
               ModifySolicitud(){
                 const BitacoraRequest={
+                  id_bitacora: "",
                   id_usuario: this.$store.state.id_usuario,
                   name: "",
                   lastname: "",
@@ -104,10 +104,10 @@
                 axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                               .then(response=>{
                                   if(response.status == 200){
-                                          Console.log('bitacora ok')
+                                          console.log('bitacora ok')
                                   }})
                               .catch(err =>{
-                                Console.log(err.data)
+                                console.log(err.data)
                               })
                 console.log(this.jsonSolicitud)
                 if(this.jsonSolicitud.rolseleccionado == null){
@@ -131,34 +131,32 @@
                             if(response.status == 200){
                                 this.jsonSolicitud = response.data;
                                 if(this.jsonSolicitud.tipo_Solicitud.id = "1"){
-                                    this.userData = this.GetUserMedico()
+                                  const jsonPayload = this.jsonSolicitud.id_usuario
+                                  axios.get("https://localhost:7227/api/Medico/GetMedico/" + jsonPayload)
+                                      .then(response=>{
+                                        if(response.status == 200){
+                                          this.userData = response.data;
+                                        }
+                                      })
+                                      .catch(err =>{
+                                        alert(err.data)
+                                      })
                                 }else if(this.jsonSolicitud.tipo_Solicitud.id = "2"){
-                                    this.userData = this.GetUserUsuario()
+                                  const jsonPayload = this.jsonSolicitud.id_usuario
+                                  axios.get("https://localhost:7151/api/User/GetUser/" + jsonPayload)
+                                      .then(response=>{
+                                        if(response.status == 200){
+                                        this.userData.nombre = response.data.name;
+                                        this.userData.apellido = response.data.lastname;
+                                        this.userData.usuario = response.data.user;
+                                        }
+                                      })
+                                      .catch(err =>{
+                                        alert(err.data)
+                                      })
                                 }   
                             }
                           
-                        })
-                        .catch(err =>{
-                          alert(err.data)
-                        })
-                },
-                GetUserMedico(){
-                    const jsonPayload = this.jsonSolicitud.id_usuario
-                    axios.get("https://localhost:7227/api/Medico/GetMedico/" + jsonPayload)
-                        .then(response=>{
-                          this.userData = response.data;
-                        })
-                        .catch(err =>{
-                          alert(err.data)
-                        })
-                },
-                GetUserUsuario(){
-                    const jsonPayload = this.jsonSolicitud.id_usuario
-                    axios.get("https://localhost:7151/api/User/GetUser/" + jsonPayload)
-                        .then(response=>{
-                          this.userData.nombre = response.data.name;
-                          this.userData.apellido = response.data.lastname;
-                          this.userData.usuario = response.data.user;
                         })
                         .catch(err =>{
                           alert(err.data)

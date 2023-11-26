@@ -24,7 +24,7 @@
                         </div>
                         <hr>
                         <v-card-actions>
-                        <v-btn variant="outlined" >Lista de Empresas</v-btn>
+                        <v-btn variant="outlined" to="/listadoEmpresasBO">Lista de Empresas</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>

@@ -124,6 +124,7 @@ import axios from 'axios'
     methods:{
         GetTransacciones(){
           const BitacoraRequest={
+            id_bitacora: "",
             id_usuario: this.$store.state.id_usuario,
             name: "",
             lastname: "",
@@ -134,10 +135,10 @@ import axios from 'axios'
           axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
-                                    Console.log('bitacora ok')
+                                    console.log('bitacora ok')
                             }})
                         .catch(err =>{
-                          Console.log(err.data)
+                          console.log(err.data)
                         })
           this.JsonFechas.user = this.$store.state.username,
           axios.post("https://localhost:7107/api/Transaccion/getListTransaccionFechasUser", this.JsonFechas)

@@ -54,6 +54,7 @@ export default{
     methods: {
             login(){
               const BitacoraRequest={
+                id_bitacora: "",
                 id_usuario: "084757d9-cbf3-4098-9374-b9e6563dcfb3",
                 name: "",
                 lastname: "",
@@ -64,10 +65,10 @@ export default{
               axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                             .then(response=>{
                                 if(response.status == 200){
-                                        Console.log('bitacora ok')
+                                        console.log('bitacora ok')
                                 }})
                             .catch(err =>{
-                              Console.log(err.data)
+                              console.log(err.data)
                             })
               console.log(this.loginPostBody.password)
               console.log(this.loginPostBody.usuario)

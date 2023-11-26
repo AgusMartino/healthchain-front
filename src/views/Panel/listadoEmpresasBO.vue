@@ -3,29 +3,28 @@
       <thead>
         <tr>
           <th class="text-left">
-            Usuario Medico
+            Cuit
           </th>
           <th class="text-left">
-            Descripcion
+            Nombre empresa
           </th>
           <th class="text-left">
-            Fecha de Solicitud
+            Direccion
           </th>
           <th class="text-left">
-            Estado
+            Fecha de creacion
           </th>
         </tr>
       </thead>
       <tbody>
         <tr
           v-for="item in this.JsonMapper"
-          :key="item.id_solicitud"
+          :key="item.id_empresa"
         >
-          <td>{{ item.user }}</td>
-          <td>{{ item.descripcion }}</td>
+          <td>{{ item.cuit }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.direccion }}</td>
           <td>{{ item.fecha_creacion }}</td>
-          <td>{{ item.estado }}</td>
-          <td><v-btn variant="outlined" :to="{name:'aceptarRechazarSolicitudEE', params:{user:item.id_usuario}}">Aceptar/Rechazar</v-btn></td>
         </tr>
       </tbody>
     </v-table>
@@ -37,35 +36,27 @@ import axios from 'axios'
       return {
         JsonMapper:[
             {
-                id_solicitud: "string",
-                cuit_empresa: "string",
-                id_usuario: "string",
-                rolseleccionado: "string",
-                tipo_Solicitud: {
-                    id: "string",
-                    tipo: "string"
-                },
-                descripcion: "string",
-                estado: "string",
-                fecha_creacion: "2023-09-07T02:37:36.502Z",
-                fecha_modificacion: "2023-09-07T02:37:36.502Z",
-                user: "string",
-                nombreEmpresa: "string"
+                cuit: "string",
+                id_empresa: "string",
+                name: "string",
+                direccion: "string",
+                fecha_creacion: "string",
+                fecha_modificacion: "string"
             }
         ],
       }
     },
     mounted() {
-        this.GetSolicitudes();
+        this.GetEmpresas();
     },
     methods:{
-        GetSolicitudes(){
+        GetEmpresas(){
           const BitacoraRequest={
             id_bitacora: "",
             id_usuario: this.$store.state.id_usuario,
             name: "",
             lastname: "",
-            description: "Se obtine el listado de solicitudes de medicos relacionados con la empresa con cuit:" + this.$store.state.cuit_empresa,
+            description: "El usuario:" + this.$store.state.id_usuario + "Esta obteniendo todas las empresas que se crearon",
             type: "INFO",
             creation_date: "",
           }
@@ -77,13 +68,11 @@ import axios from 'axios'
                         .catch(err =>{
                           console.log(err.data)
                         })
-            const JsonRequest = {
-              cuit: this.$store.state.cuit_empresa,
-              tipo: "1"
-            }
-            axios.post("https://localhost:7274/api/Solicitud/GetAllSolicitudes", JsonRequest)
+            axios.get("https://localhost:7227/api/Empresa/GetAllEmpresa")
                       .then(response=>{
-                        this.JsonMapper = response.data;
+                        if(response.status == 200){
+                            this.JsonMapper = response.data;
+                        }
                       })
                       .catch(err =>{
                         alert(err.data)

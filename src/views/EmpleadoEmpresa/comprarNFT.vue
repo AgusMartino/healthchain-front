@@ -1,48 +1,61 @@
 <template>
-    <v-container>
-      <v-row align-content="center" justify="center">
-        <v-col
-          v-for="item in PostNFTBody"
-          :key="item.tokenNFTid"
-          cols="auto"
-        >
-          <v-card
-            class="mx-auto"
-            max-width="344"
-            variant="tonal"
-          >
-            <v-card-item>
-              <div>
-                <div class="text-overline mb-1">
-                    {{ item.tokenNFTid }}
-                </div>
-                <div class="text-overline mb-1">
-                    Nombre: {{ item.nombre_paciente }}
-                    Apellido: {{ item.apellido_paciente }}
-                    Dni: {{ item.dni }}
-                    Cobertura: {{ item.cobertura }}
-                    Consulta: {{ item.consulta }}
-                    Patologia: {{ item.patologia }}
-                </div>
-                <div class="text-caption">
-                    Precio: {{ item.precio }} ETH
-                </div>
-              </div>
-            </v-card-item>
+    <form class="form">
+    <v-text-field
+      disableb
+      v-model="PostNFTBody.tokenNFTid"
+    ></v-text-field>
+
+    <v-text-field
+      disableb
+      v-model="this.PostNFTBody.nombre_paciente"
+    ></v-text-field>
+    
+    <v-text-field
+      disableb
+      v-model="this.PostNFTBody.apellido_paciente"
+    ></v-text-field>
   
-            <v-card-actions>
-              <v-btn variant="outlined">
-                Comprar
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+    <v-text-field
+      disableb
+      v-model="this.PostNFTBody.dni"
+    ></v-text-field>
+
+    <v-text-field
+      disableb
+      v-model="this.PostNFTBody.cobertura"
+    ></v-text-field>
+
+    <v-text-field
+      disableb
+      v-model="this.PostNFTBody.consulta"
+    ></v-text-field>
+
+    <v-text-field
+      disableb
+      v-model="this.PostNFTBody.patologia"
+    ></v-text-field>
+
+    <v-text-field
+      disableb
+      v-model="this.PostNFTBody.precio"
+    ></v-text-field>
+    <div>
+      <v-btn
+      class="me-4"
+      @click="Comprar()"
+      >
+      Comprar NFT
+      </v-btn>
+
+      <v-btn @click="LimpiarCampos()">
+        Limpiar campos modificables
+      </v-btn>
+    </div>  
+    
+  </form>
   </template>
     <script>
     import axios from 'axios'
-    import router from '../router'
       export default{
         props: {
             nft: String
@@ -72,6 +85,7 @@
       methods: {
               Comprar(){
                 const BitacoraRequest = {
+                    id_bitacora: "",
                     id_usuario: this.$store.state.id_usuario,
                     name: "",
                     lastname: "",
@@ -82,16 +96,17 @@
                   axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                           .then(response=>{
                               if(response.status == 200){
-                                      Console.log('bitacora ok')
+                                      console.log('bitacora ok')
                               }})
                           .catch(err =>{
-                            Console.log(err.data)
+                            console.log(err.data)
                           }),
                   this.PostNFTBody.id_user_Transfer = this.$store.state.id_usuario
+                  console.log(this.PostNFTBody)
                   axios.post("https://localhost:7107/api/NFT/TransaferNFTWithETH", this.PostNFTBody)
                         .then(response=>{
                             if(response.status == 200)
-                            alert("Compra realizada con exito")
+                            alert("Revisar las transacciones si la compra fue realizada")
                             router.replace('/homeEE')
                         })
                         .catch(err =>{
@@ -100,6 +115,7 @@
                 },
               GetNFT(){
                   const BitacoraRequest = {
+                    id_bitacora: "",
                     id_usuario: this.$store.state.id_usuario,
                     name: "",
                     lastname: "",
@@ -110,10 +126,10 @@
                   axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                           .then(response=>{
                               if(response.status == 200){
-                                      Console.log('bitacora ok')
+                                      console.log('bitacora ok')
                               }})
                           .catch(err =>{
-                            Console.log(err.data)
+                            console.log(err.data)
                           })
                   axios.get("https://localhost:7107/api/NFT/getNFT/" + this.nft.toString())
                   .then(response=>{

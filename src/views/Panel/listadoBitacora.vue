@@ -2,54 +2,22 @@
     <div>
         <v-layout row wrap>
             <v-flex xs12 sm6 md4>
-                <v-menu
-                    ref="menu"
-                    :close-on-content-click="false"
-                    :nudge-right="40"
-                    :return-value.sync="date"
-                    lazy
-                    transition="scale-transition"
-                    offset-y
-                    full-width
-                    min-width="290px"
-                >
-                    <template v-slot:activator="{ on }">
                     <v-text-field
-                        v-model="fecha_incio"
+                        v-model="this.JsonFechas.fecha_de_incio"
                         label="Seleccionar fecha de incio"
-                        prepend-icon="event"
-                        readonly
                         v-on="on"
+                        type="datetime-local"
                     ></v-text-field>
-                    </template>
-                    <v-date-picker v-model="fecha_incio" no-title scrollable>
-                    </v-date-picker>
-                </v-menu>
-            </v-flex>
+            </v-flex>                  
+        </v-layout>
+        <v-layout row wrap>
             <v-flex xs12 sm6 md4>
-                <v-menu
-                    ref="menu"
-                    :close-on-content-click="false"
-                    :nudge-right="40"
-                    :return-value.sync="date"
-                    lazy
-                    transition="scale-transition"
-                    offset-y
-                    full-width
-                    min-width="290px"
-                >
-                    <template v-slot:activator="{ on }">
                     <v-text-field
-                        v-model="fecha_fin"
+                        v-model="this.JsonFechas.fecha_de_fin"
                         label="Seleccionar fecha de fin"
-                        prepend-icon="event"
-                        readonly
                         v-on="on"
+                        type="datetime-local"
                     ></v-text-field>
-                    </template>
-                    <v-date-picker v-model="fecha_fin" no-title scrollable>
-                    </v-date-picker>
-                </v-menu>
             </v-flex>
         </v-layout>
         <v-btn @click="GetBitacoras()">
@@ -67,26 +35,26 @@
                 Apellido
             </th>
             <th class="text-left">
-                Descripcion
+                Tipo de log
             </th>
             <th class="text-left">
-                Tipo de bitacora
+                Fecha
             </th>
             <th class="text-left">
-                Fecha de bitacora
+                Detalle
             </th>
             </tr>
         </thead>
         <tbody>
             <tr
             v-for="item in this.JsonMapper"
-            :key="item.id_solicitud"
+            :key="item.id_log"
             >
-            <td>{{ item.cuit_empresa }}</td>
-            <td>{{ item.nombreEmpresa }}</td>
-            <td>{{ item.descripcion }}</td>
-            <td>{{ item.fecha_creacion }}</td>
-            <td>{{ item.estado }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.lastname }}</td>
+            <td>{{ item.type }}</td>
+            <td>{{ item.creation_date }}</td>
+            <td>{{ item.description }}</td>
             </tr>
         </tbody>
         </v-table>
@@ -98,10 +66,9 @@ import axios from 'axios'
     data () {
       return {
         validacionFechas: false,
-        fecha_incio: "",
-        fecha_fin: "",
         JsonMapper:[
             {
+                id_bitacora: "string",
                 id_usuario: "string",
                 name: "string",
                 lastname: "string",
@@ -113,30 +80,36 @@ import axios from 'axios'
         JsonFechas:{
             fecha_de_incio:"",
             fecha_de_fin:""
-        }
+        },
       }
     },
     methods:{
         GetBitacoras(){
           const BitacoraRequest={
+            id_bitacora: "",
             id_usuario: this.$store.state.id_usuario,
             name: "",
             lastname: "",
-            description: "El usuario:" + this.$store.state.id_usuario + "Esta obteniendo la bitacora de entre las fechas:" + this.fecha_incio + "y" + this.fecha_fin,
+            description: "El usuario:" + this.$store.state.id_usuario + "Esta obteniendo la bitacora de entre las fechas:" + this.JsonFechas.fecha_de_incio + "y" + this.JsonFechas.fecha_de_fin,
             type: "INFO",
             creation_date: "",
           }
           axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
-                                    Console.log('bitacora ok')
+                                    console.log('bitacora ok')
                             }})
                         .catch(err =>{
-                          Console.log(err.data)
+                          console.log(err.data)
                         })
-          axios.get("https://localhost:7182/api/Bitacora/GetBitacora", this.JsonFechas)
+          axios.post("https://localhost:7182/api/Bitacora/GetBitacora", this.JsonFechas)
                         .then(response=>{
-                            this.JsonMapper = response.data;
+                            if(response.status == 200){
+                                this.JsonMapper = response.data;
+                                this.validacionFechas = true
+                                console.log("Se obtuvo info")
+                                console.log(response.data)
+                            }
                         })
                         .catch(err =>{
                             alert(err.data)

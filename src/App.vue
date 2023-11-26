@@ -11,7 +11,7 @@
       <v-btn v-if="this.$store.state.user_type == '1'" to="/gestorNFTEE" class="mr-2">Gestor NFT</v-btn>
       <v-btn v-if="this.$store.state.user_type == '1'" to="/gestorMedicosEE" class="mr-2">Gestor Medicos</v-btn>
       <v-btn v-if="this.$store.state.user_type == '1'" to="/gestorUsuariosEE" class="mr-2">Gestor Usuarios</v-btn>
-      <v-btn v-if="this.$store.state.user_type == '2'" to="/gestorNFTM" class="mr-2">Gestor NFT</v-btn>
+      <v-btn v-if="this.$store.state.user_type == '2'" to="/NftsPropiedadMedico" class="mr-2">Gestor NFT</v-btn>
       <v-btn v-if="this.$store.state.user_type == '2'" to="/gestorSolicitudesM" class="mr-2">Gestor de solicitudes</v-btn>
       <v-btn v-if="this.$store.state.user_type == '2'" to="/listadoEmpresasAsociadasM" class="mr-2">Listado de empresas asociadas</v-btn>
       <v-btn v-if="this.$store.state.user_type == '3'" to="/gestorEmpresaBO" class="mr-2">Gestor de Empresas</v-btn>

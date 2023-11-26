@@ -1,41 +1,52 @@
 <template>
-    <v-container>
-      <v-row align-content="center" justify="center">
-        <v-col
-          v-for="item in JsonMapper"
-          :key="item.tokenNFTid"
-          cols="auto"
-        >
-          <v-card
-            class="mx-auto"
-            max-width="344"
-            variant="tonal"
-          >
-            <v-card-item>
-              <div>
-                <div class="text-overline mb-1">
-                    {{ item.tokenNFTid }}
-                </div>
-                <div class="text-overline mb-1">
-                    Nombre: {{ item.nombre_paciente }}
-                    Apellido: {{ item.apellido_paciente }}
-                    Dni: {{ item.dni }}
-                </div>
-                <div class="text-caption">
-                    Precio: {{ item.precio }} ETH
-                </div>
-              </div>
-            </v-card-item>
-  
-            <v-card-actions>
-              <v-btn variant="outlined" :to="{name:'comprarNFT', params:{nft:item.tokenNFTid}}">
-                Comprar
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
+  <div>
+      <v-table>
+        <thead>
+            <tr>
+            <th class="text-left">
+                Identificador Token
+            </th>
+            <th class="text-left">
+                Nombre Paciente
+            </th>
+            <th class="text-left">
+                Apellido Paciente
+            </th>
+            <th class="text-left">
+                Cobertura
+            </th>
+            <th class="text-left">
+                Consulta
+            </th>
+            <th class="text-left">
+                Patologia
+            </th>
+            <th class="text-left">
+                Estado
+            </th>
+            <th class="text-left">
+                Precio
+            </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+            v-for="item in this.JsonMapper"
+            :key="item.tokenNFTid"
+            >
+            <td>{{ item.tokenNFTid }}</td>
+            <td>{{ item.nombre_paciente }}</td>
+            <td>{{ item.apellido_paciente }}</td>
+            <td>{{ item.cobertura }}</td>
+            <td>{{ item.consulta }}</td>
+            <td>{{ item.patologia }}</td>
+            <td>{{ item.estado }}</td>
+            <td>{{ item.precio }} ETH</td>
+            <td><v-btn variant="outlined" :to="{name:'comprarNFTEE', params:{nft:item.tokenNFTid}}">Comprar NFT</v-btn></td>
+            </tr>
+        </tbody>
+      </v-table>
+  </div>
 </template>
 <script>
   import axios from 'axios'
@@ -65,6 +76,7 @@
     methods:{
         GetNftPublicados(){
           const BitacoraRequest={
+            id_bitacora: "",
             id_usuario: this.$store.state.id_usuario,
             name: "",
             lastname: "",
@@ -75,15 +87,17 @@
           axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
-                                    Console.log('bitacora ok')
+                                    console.log('bitacora ok')
                             }})
                         .catch(err =>{
-                          Console.log(err.data)
+                          console.log(err.data)
                         })            
-            axios.get("https://localhost:7107/api/NFT/GetNFTMarketplace/" + this.$store.state.cuit_empresa)
+          axios.get("https://localhost:7107/api/NFT/GetNFTMarketplace/" + this.$store.state.id_usuario)
                       .then(response=>{
+                        if(response.status == 200){
                         this.JsonMapper = response.data;
                         console.log(this.JsonMapper)
+                      }
                       })
                       .catch(err =>{
                         alert(err.data)

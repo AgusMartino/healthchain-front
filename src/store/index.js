@@ -44,6 +44,7 @@ export default createStore({
           console.log(authResult.idToken)
           console.log(expiresAt);
           const BitacoraRequest = {
+            id_bitacora: "",
             id_usuario: "084757d9-cbf3-4098-9374-b9e6563dcfb3",
             name: "",
             lastname: "",
@@ -55,15 +56,16 @@ export default createStore({
                         .then(response=>{
                             if(response.status == 200){
                                 this.jsonSolicitud = response.data;
-                                    Console.log('bitacora ok')
+                                    console.log('bitacora ok')
                             }})
                         .catch(err =>{
-                          Console.log(err.data)
+                          console.log(err.data)
                         })
           router.replace('/seleccionUsuario')
         } 
         else if (err) {
           const BitacoraRequestError = {
+            id_bitacora: "",
             id_usuario: "084757d9-cbf3-4098-9374-b9e6563dcfb3",
             name: "",
             lastname: "",
@@ -75,10 +77,10 @@ export default createStore({
                         .then(response=>{
                             if(response.status == 200){
                                 this.jsonSolicitud = response.data;
-                                    Console.log('bitacora ok')
+                                    console.log('bitacora ok')
                             }})
                         .catch(err =>{
-                          Console.log(err.data)
+                          console.log(err.data)
                         })
           alert('login failed. Error #KJN838');
           router.replace('/login');

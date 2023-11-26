@@ -82,6 +82,7 @@
     methods: {
             Solicitud(){
               const BitacoraRequest = {
+                  id_bitacora: "",
                   id_usuario: this.userData.id,
                   name: "",
                   lastname: "",
@@ -92,10 +93,10 @@
                 axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
-                                    Console.log('bitacora ok')
+                                    console.log('bitacora ok')
                             }})
                         .catch(err =>{
-                          Console.log(err.data)
+                          console.log(err.data)
                         })
                 console.log(this.userData)
                 this.jsonSolicitud.id_usuario = this.userData.id
@@ -113,6 +114,7 @@
               },
             GetUser(){
               const BitacoraRequest = {
+                id_bitacora: "",
                 id_usuario: "084757d9-cbf3-4098-9374-b9e6563dcfb3",
                 name: "",
                 lastname: "",
@@ -123,10 +125,10 @@
               axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
-                                    Console.log('bitacora ok')
+                                    console.log('bitacora ok')
                             }})
                         .catch(err =>{
-                          Console.log(err.data)
+                          console.log(err.data)
                         })
               const jsonPayload = this.parseJwt();
               console.log(jsonPayload)
@@ -146,6 +148,8 @@
               }
               else{
                 const BitacoraRequest = {
+                  id_bitacora: "",
+                  id_bitacora: "",
                   id_usuario: this.userData.id,
                   name: "",
                   lastname: "",
@@ -156,10 +160,10 @@
                 axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
-                                    Console.log('bitacora ok')
+                                    console.log('bitacora ok')
                             }})
                         .catch(err =>{
-                          Console.log(err.data)
+                          console.log(err.data)
                         })
                 axios.get("https://localhost:7227/api/Empresa/GetOneEmpresa/" + this.cuit.toString())
                 .then(response=>{

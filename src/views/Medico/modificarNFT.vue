@@ -37,9 +37,9 @@
     <div>
       <v-btn
       class="me-4"
-      @click="PostNFT()"
+      @click="ModificarNFT()"
       >
-      Crear NFT
+      Modificar NFT
       </v-btn>
 
       <v-btn @click="LimpiarCampos()">
@@ -78,6 +78,7 @@
     methods:{
       ModificarNFT(){
         const BitacoraRequest={
+          id_bitacora: "",
           id_usuario: this.$store.state.id_usuario,
           name: "",
           lastname: "",
@@ -88,11 +89,14 @@
         axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                       .then(response=>{
                           if(response.status == 200){
-                                  Console.log('bitacora ok')
+                                  console.log('bitacora ok')
                           }})
                       .catch(err =>{
-                        Console.log(err.data)
+                        console.log(err.data)
                       })
+        this.PostNFTBody.id_user = this.$store.state.id_usuario,
+        this.PostNFTBody.id_user_Transfer = "",
+        console.log(this.PostNFTBody)
         axios.post("https://localhost:7107/api/NFT/modifyInformacionNFT", this.PostNFTBody)
           .then(response=>{
                   if(response.status==200){
@@ -108,6 +112,7 @@
       },
       GetNFT(){
           const BitacoraRequest = {
+            id_bitacora: "",
             id_usuario: this.$store.state.id_usuario,
             name: "",
             lastname: "",
@@ -118,10 +123,10 @@
           axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
             .then(response=>{
               if(response.status == 200){
-                  Console.log('bitacora ok')
+                  console.log('bitacora ok')
               }})
               .catch(err =>{
-                  Console.log(err.data)
+                  console.log(err.data)
               })
           axios.get("https://localhost:7107/api/NFT/getNFT/" + this.nft.toString())
             .then(response=>{

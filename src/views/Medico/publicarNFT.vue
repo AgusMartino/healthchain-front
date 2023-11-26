@@ -42,7 +42,7 @@
     <div>
       <v-btn
       class="me-4"
-      @click="ModificarNFT()"
+      @click="PublicarNFT()"
       >
       Publicar NFT
       </v-btn>
@@ -81,8 +81,9 @@
       this.GetNFT()
     },
     methods:{
-      ModificarNFT(){
+      PublicarNFT(){
         const BitacoraRequest={
+          id_bitacora: "",
           id_usuario: this.$store.state.id_usuario,
           name: "",
           lastname: "",
@@ -93,13 +94,15 @@
         axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                       .then(response=>{
                           if(response.status == 200){
-                                  Console.log('bitacora ok')
+                                  console.log('bitacora ok')
                           }})
                       .catch(err =>{
-                        Console.log(err.data)
+                        console.log(err.data)
                       })
         this.PostNFTBody.estado = "market"
-        axios.post("https://localhost:7107/api/NFT/modifyInformacionNFT", this.PostNFTBody)
+        this.PostNFTBody.id_user = this.$store.state.id_usuario,
+        this.PostNFTBody.id_user_Transfer = "",
+        axios.post("https://localhost:7107/api/NFT/SellNFT", this.PostNFTBody)
           .then(response=>{
                   if(response.status==200){
                       alert("publicado con exito!")
@@ -114,6 +117,7 @@
       },
       GetNFT(){
           const BitacoraRequest = {
+            id_bitacora: "",
             id_usuario: this.$store.state.id_usuario,
             name: "",
             lastname: "",
@@ -124,10 +128,10 @@
           axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
             .then(response=>{
               if(response.status == 200){
-                  Console.log('bitacora ok')
+                  console.log('bitacora ok')
               }})
               .catch(err =>{
-                  Console.log(err.data)
+                  console.log(err.data)
               })
           axios.get("https://localhost:7107/api/NFT/getNFT/" + this.nft.toString())
             .then(response=>{

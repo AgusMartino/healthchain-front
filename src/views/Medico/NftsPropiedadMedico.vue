@@ -1,5 +1,5 @@
 <template>
-    <div v-if="validacionFechas">
+    <div>
         <v-table>
         <thead>
             <tr>
@@ -41,7 +41,7 @@
             <td>{{ item.consulta }}</td>
             <td>{{ item.patologia }}</td>
             <td>{{ item.estado }}</td>
-            <td>{{ item.precio }}</td>
+            <td>{{ item.precio }} ETH</td>
             <td><v-btn variant="outlined" :to="{name:'modificarNFTMedico', params:{nft:item.tokenNFTid}}">Modificar NFT</v-btn></td>
             <td><v-btn variant="outlined" :to="{name:'publicarNFTMedico', params:{nft:item.tokenNFTid}}">Publicar NFT</v-btn></td>
             </tr>
@@ -77,6 +77,7 @@ import axios from 'axios'
     methods:{
         GetNft(){
           const BitacoraRequest={
+            id_bitacora: "",
             id_usuario: this.$store.state.id_usuario,
             name: "",
             lastname: "",
@@ -87,14 +88,16 @@ import axios from 'axios'
           axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
-                                    Console.log('bitacora ok')
+                                    console.log('bitacora ok')
                             }})
                         .catch(err =>{
-                          Console.log(err.data)
+                          console.log(err.data)
                         })
-          axios.post("https://localhost:7107/api/NFT/GetNFTUser/" + this.$store.state.id_usuario)
+          axios.get("https://localhost:7107/api/NFT/GetNFTUser/" + this.$store.state.id_usuario)
                         .then(response=>{
+                            if(response.status == 200){
                             this.JsonMapper = response.data;
+                            }
                         })
                         .catch(err =>{
                             alert(err.data)

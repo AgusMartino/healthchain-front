@@ -6,7 +6,6 @@
             item-title="usuario"
             item-value="usuario"
             label="Seleccionar Medico"
-            @change="this.MedicoSelect"
           ></v-select>
 
         <v-text-field
@@ -49,7 +48,6 @@
   </template>
     <script>
     import axios from 'axios'
-    import router from '../router'
       export default{
         data(){
           return{
@@ -67,14 +65,14 @@
             PostNFTBody: {
                 id_user: this.$store.state.id_usuario,
                 id_user_Transfer: "",
-                tokenNFTid: "",
-                nombre_paciente: "",
-                apellido_paciente: "",
-                dni: "",
-                cobertura: "",
-                consulta: "",
-                patologia: "",
-                estado: "",
+                TokenNFTid: "",
+                Nombre_paciente: "",
+                Apellido_paciente: "",
+                Dni: "",
+                Cobertura: "",
+                Consulta: "",
+                Patologia: "",
+                Estado: "",
                 precio: ""
             }
           }
@@ -84,7 +82,9 @@
       },
       methods: {
               Transaferir(){
+                console.log(this.MedicoSelect)
                 const BitacoraRequest = {
+                    id_bitacora: "",
                     id_usuario: this.$store.state.id_usuario,
                     name: "",
                     lastname: "",
@@ -95,17 +95,19 @@
                   axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                           .then(response=>{
                               if(response.status == 200){
-                                      Console.log('bitacora ok')
+                                      console.log('bitacora ok')
                               }})
                           .catch(err =>{
-                            Console.log(err.data)
+                            console.log(err.data)
                           }),
-                  this.PostNFTBody.id_user_Transfer = MedicoSelect
+                  this.PostNFTBody.id_user_Transfer = this.MedicoSelect,
+                  this.PostNFTBody.id_user = this.$store.state.id_usuario,
+                  console.log(this.PostNFTBody)
                   if(this.PostNFTBody.id_user_Transfer != ""){
                     axios.post("https://localhost:7107/api/NFT/TransaferNFT", this.PostNFTBody)
                         .then(response=>{
                             if(response.status == 200)
-                            alert("Solicitud enviado con exito")
+                            alert("Validar transaccion en lista de transacciones!!")
                             router.replace('/homeEE')
                         })
                         .catch(err =>{
@@ -118,6 +120,7 @@
                 },
               GetMedicosEmpresa(){
                 const BitacoraRequest = {
+                  id_bitacora: "",
                   id_usuario: this.$store.state.id_usuario,
                   name: "",
                   lastname: "",
@@ -128,10 +131,10 @@
                 axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                           .then(response=>{
                               if(response.status == 200){
-                                      Console.log('bitacora ok')
+                                      console.log('bitacora ok')
                               }})
                           .catch(err =>{
-                            Console.log(err.data)
+                            console.log(err.data)
                           })
                 axios.get("https://localhost:7227/api/Medico/GetAllMedicosEmpresas/" + this.$store.state.cuit_empresa)
                         .then(response=>{
@@ -144,11 +147,13 @@
                         })
               },
               GetNFT(){
+                console.log(this.MedicoSelect)
                 if(this.nft == null){
                   alert("Debe completar el identificador del nft a buscar")
                 }
                 else{
                   const BitacoraRequest = {
+                    id_bitacora: "",
                     id_usuario: this.$store.state.id_usuario,
                     name: "",
                     lastname: "",
@@ -159,10 +164,10 @@
                   axios.post("https://localhost:7182/api/Bitacora/AddBitacora", BitacoraRequest)
                           .then(response=>{
                               if(response.status == 200){
-                                      Console.log('bitacora ok')
+                                      console.log('bitacora ok')
                               }})
                           .catch(err =>{
-                            Console.log(err.data)
+                            console.log(err.data)
                           })
                   axios.get("https://localhost:7107/api/NFT/getNFT/" + this.nft.toString())
                   .then(response=>{
