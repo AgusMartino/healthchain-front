@@ -131,7 +131,7 @@
                           .catch(err =>{
                             console.log(err.data)
                           })
-                  axios.get("https://localhost:7107/api/NFT/getNFT/" + this.nft.toString())
+                  axios.get("https://localhost:7107/api/NFT/GetNFTUsuario/" + this.nft.toString())
                   .then(response=>{
                     if(response.status==200){
                       this.PostNFTBody = response.data;
