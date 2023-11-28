@@ -89,6 +89,8 @@
                                 .catch(err =>{
                                   console.log(err.data)
                                 })
+                  this.userData.rol.rol = "" 
+                  console.log(this.userData)
                   axios.put("https://healthchain-api-usuarios-9e18a4d4a113.herokuapp.com/api/User/UpdateUser", this.userData)
                   .then(response=>{
                     if(response.status == 200)
