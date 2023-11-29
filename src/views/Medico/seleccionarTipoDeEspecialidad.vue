@@ -8,7 +8,7 @@
             label="Seleccionar Especialidad"
           ></v-select>
 
-      <v-btn variant="outlined" @click="AddEespecialidad()">Seleccionar Especialidad</v-btn>
+      <v-btn variant="outlined" class="colorButton" @click="AddEespecialidad()">Seleccionar Especialidad</v-btn>
     </form>
   </template>
     <script>
@@ -72,7 +72,7 @@
             }
           }
     </script>
-    <style>
+<style>
       .form{
           margin-top: 20px;
           margin-left: 20%;

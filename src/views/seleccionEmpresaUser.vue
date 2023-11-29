@@ -1,47 +1,57 @@
 <template>
-  <form class="form">
-      <v-text-field
-        v-model="cuit"
-        :counter="10"
-        label="Cuit"
-      ></v-text-field>
+  <div v-if="loading">
+      <v-progress-circular
+      :size="70"
+      :width="7"
+      color="purple"
+      indeterminate
+      ></v-progress-circular>
+  </div>
+  <div v-if="!loading">
+      <form class="form">
+        <v-text-field
+          v-model="cuit"
+          :counter="10"
+          label="Cuit"
+        ></v-text-field>
 
-      <v-btn variant="outlined" @click="GetEmpresa()">Buscar empresa</v-btn>
-  </form>
+        <v-btn variant="outlined" @click="GetEmpresa()">Buscar empresa</v-btn>
+      </form>
 
-  <form class="form" v-if="validacionCuit">
-      <v-text-field
-        disableb
-        v-model="this.jsonEmpresa.name"
-      ></v-text-field>
-  
-      <v-text-field
-        disableb
-        v-model="this.jsonEmpresa.direccion"
-      ></v-text-field>
+      <form class="form" v-if="validacionCuit">
+        <v-text-field
+          disableb
+          v-model="this.jsonEmpresa.name"
+        ></v-text-field>
+    
+        <v-text-field
+          disableb
+          v-model="this.jsonEmpresa.direccion"
+        ></v-text-field>
 
-      <v-select
-          v-model="this.Rolselect"
-          :items="this.jsonRol"
-          item-title="Rol"
-          item-value="id"
-          label="Seleccionar Rol"
-          @change="this.Rolselect"
-        ></v-select>
+        <v-select
+            v-model="this.Rolselect"
+            :items="this.jsonRol"
+            item-title="Rol"
+            item-value="id"
+            label="Seleccionar Rol"
+            @change="this.Rolselect"
+          ></v-select>
 
-      <v-text-field
-        label="Motivo"
-        v-model="this.jsonSolicitud.descripcion"
-      ></v-text-field>
-      <div>
-        <v-btn
-        class="me-4"
-        @click="Solicitud()"
-      >
-        Enviar Solicitud
-      </v-btn>
-      </div>  
-    </form>
+        <v-text-field
+          label="Motivo"
+          v-model="this.jsonSolicitud.descripcion"
+        ></v-text-field>
+        <div>
+          <v-btn
+          class="me-4"
+          @click="Solicitud()"
+        >
+          Enviar Solicitud
+        </v-btn>
+        </div>  
+      </form>
+  </div>
 </template>
   <script>
   import axios from 'axios'
@@ -49,6 +59,7 @@
     export default{
       data(){
         return{
+          loading: false,
           userData: {},
           validacionCuit: false,
           cuit: null,
@@ -122,6 +133,7 @@
                 type: "INFO",
                 creation_date: "",
               }
+              this.loading = false
               axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
@@ -141,6 +153,9 @@
                       .catch(err =>{
                         alert(err.data)
                       })
+                      .finally(data =>{ 
+                          this.loading = false
+                      })
             },
             GetEmpresa(){
               if(this.cuit == null){
@@ -157,6 +172,7 @@
                   type: "INFO",
                   creation_date: "",
                 }
+                this.loading = true
                 axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
@@ -180,6 +196,9 @@
                 .catch(err =>{
                   alert(err.data)
                 })
+                .finally(data =>{ 
+                  this.loading = false
+                })
               }
             },
             setSelected(e){
@@ -199,6 +218,12 @@
         }
   </script>
   <style>
+    .loading {
+        display: grid;
+        place-items: center;
+        height: 50%;
+        width: 100%;
+    }
     .form{
         margin-top: 20px;
         margin-left: 20%;

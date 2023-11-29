@@ -41,14 +41,10 @@
     ></v-text-field>
     <div>
       <v-btn
-      class="me-4"
+      class="colorButton me-4 mt-4"
       @click="Comprar()"
       >
       Comprar NFT
-      </v-btn>
-
-      <v-btn @click="LimpiarCampos()">
-        Limpiar campos modificables
       </v-btn>
     </div>  
     

@@ -1,5 +1,5 @@
 <template>
-    <form>
+    <form class="form">
         Informacioncion del Usuario:
         <v-text-field
           disabled
@@ -27,7 +27,7 @@
   
         <div>
           <v-btn
-          class="me-4"
+          class="colorButton me-4 mt-4"
           @click="ModifyUsuario()"
         >
           Modificar Rol Usuario

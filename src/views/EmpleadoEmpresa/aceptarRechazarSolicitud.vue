@@ -1,5 +1,14 @@
 <template>
-    <form>
+  <div class="loading" v-if="loading">
+      <v-progress-circular
+      :size="70"
+      :width="7"
+      color="purple"
+      indeterminate
+      ></v-progress-circular>
+  </div>
+  <div v-if="!loading">
+    <form class="form">
         Informacioncion del solicitante:
         <v-text-field
           disabled
@@ -39,13 +48,14 @@
   
         <div>
           <v-btn
-          class="me-4"
+          class="colorButton me-4 mt-4"
           @click="ModifySolicitud()"
         >
           Actualizar Estado Solicitud
         </v-btn>
         </div>  
-      </form>
+      </form>  
+  </div>
   </template>
     <script>
   import axios from 'axios';
@@ -55,6 +65,7 @@
         },
         data(){
           return{
+            loading: false,
             jsonSolicitudrequest: {
                     cuit: this.$store.state.cuit_empresa,
                     usuario: this.user
@@ -126,26 +137,30 @@
                 GetSolicitud(){
                 console.log(this.user)
                 console.log(this.jsonSolicitudrequest)
+                this.loading = true
                 axios.post("https://healthchain-api-solicitudes-b793d42c9fb5.herokuapp.com/api/Solicitud/GetOneSolicitud", this.jsonSolicitudrequest)
                         .then(response=>{
                             if(response.status == 200){
                                 this.jsonSolicitud = response.data;
-                                if(this.jsonSolicitud.tipo_Solicitud.id = "1"){
+                                console.log(response.data)
+                                if(response.data.tipo_Solicitud.id == "1"){
                                   const jsonPayload = this.jsonSolicitud.id_usuario
                                   axios.get("https://healtchain-api-abms-4fd21ff66375.herokuapp.com/api/Medico/GetMedico/" + jsonPayload)
                                       .then(response=>{
                                         if(response.status == 200){
                                           this.userData = response.data;
+                                          console.log(response.data)
                                         }
                                       })
                                       .catch(err =>{
                                         alert(err.data)
                                       })
-                                }else if(this.jsonSolicitud.tipo_Solicitud.id = "2"){
+                                }else if(response.data.tipo_Solicitud.id == "2"){
                                   const jsonPayload = this.jsonSolicitud.id_usuario
                                   axios.get("https://healthchain-api-usuarios-9e18a4d4a113.herokuapp.com/api/User/GetUser/" + jsonPayload)
                                       .then(response=>{
                                         if(response.status == 200){
+                                        console.log(response.data)
                                         this.userData.nombre = response.data.name;
                                         this.userData.apellido = response.data.lastname;
                                         this.userData.usuario = response.data.user;
@@ -160,6 +175,9 @@
                         })
                         .catch(err =>{
                           alert(err.data)
+                        })          
+                        .finally(data =>{ 
+                            this.loading = false
                         })
                 },
             }

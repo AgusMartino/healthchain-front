@@ -10,7 +10,7 @@
     ></v-select>
   </form>
 
-  <form>
+  <form class="form">
 
       Cuit de empresa Seleccionada:
       <v-text-field
@@ -42,7 +42,7 @@
 
       <div>
         <v-btn
-        class="me-4"
+        class="colorButton me-4"
         @click="Solicitud()"
       >
         Enviar Solicitud
@@ -164,3 +164,11 @@ import router from '../../router';
           }
         }
   </script>
+<style>
+.colorTable{
+    background-color: #A8F6B8;
+}
+.colorButton{
+    background-color: #CFD0CF;
+}
+</style>

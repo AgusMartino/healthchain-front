@@ -1,8 +1,16 @@
 <template>
-    <div>
-        <v-table>
-        <thead>
-            <tr>
+    <div class="loading" v-if="loading">
+      <v-progress-circular
+      :size="70"
+      :width="7"
+      color="purple"
+      indeterminate
+      ></v-progress-circular>
+    </div>
+    <div v-if="!loading">
+        <v-table class="colorTableEmpresa" variant="outlined">
+        <thead variant="outlined">
+            <tr variant="outlined">
             <th class="text-left">
                 Identificador Token
             </th>
@@ -52,6 +60,7 @@ import axios from 'axios'
   export default {
     data () {
       return {
+        loading: false,
         JsonMapper:[
             {
                 tokenNFTid: "string",
@@ -83,6 +92,7 @@ import axios from 'axios'
             type: "INFO",
             creation_date: "",
           }
+          this.loading = true
           axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
@@ -101,7 +111,22 @@ import axios from 'axios'
                         .catch(err =>{
                             alert(err.data)
                         })
+                        .finally(data =>{ 
+                            this.loading = false
+                        })
+
         }
     }
   }
 </script>
+<style>
+.loading {
+    display: grid;
+    place-items: center;
+    height: 50%;
+    width: 100%;
+  }
+.colorTableEmpresa{
+    background-color: #BBCECF;
+}
+</style>

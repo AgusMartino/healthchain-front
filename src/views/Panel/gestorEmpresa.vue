@@ -2,29 +2,27 @@
     <v-container row wrap align-center>
       <v-slide-y-transition mode="out-in">
           <v-layout class="layout">
-            <div>
+            <div class="colorButton">
                 <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
-                    <v-card class="mx-auto" max-width="344" variant="outlined">
-                        <div class="pa-3">
-                            Imagen button
-                        </div>
-                        <hr>
+                    <v-card class="mx-auto" max-width="1500" variant="outlined">
                         <v-card-actions>
-                        <v-btn  variant="outlined" to="/CrearEmpresaBO">Crear Empresa</v-btn>
+                        <div class="imagen">
+                            <i class="fa-solid fa-building-ngo fa-2xl"></i>
+                        </div>
+                        <v-btn to="/CrearEmpresaBO">Crear Empresa</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>
             </div>
 
-            <div>
+            <div class="colorButton">
                 <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
-                    <v-card class="mx-auto" max-width="344" variant="outlined">
-                        <div class="pa-3">
-                            Imagen button
-                        </div>
-                        <hr>
+                    <v-card class="mx-auto" max-width="1500" variant="outlined">
                         <v-card-actions>
-                        <v-btn variant="outlined" to="/listadoEmpresasBO">Lista de Empresas</v-btn>
+                        <div class="imagen">
+                            <i class="fa-solid fa-bars fa-2xl"></i>
+                        </div>
+                        <v-btn to="/listadoEmpresasBO">Lista de Empresas</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-flex>

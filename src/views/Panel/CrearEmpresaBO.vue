@@ -16,13 +16,13 @@
       ></v-text-field>
       <div>
         <v-btn
-        class="me-4"
+        class="colorButton me-4 mt-4"
         @click="PostEmpresa()"
         >
         Crear Empresa
         </v-btn>
   
-        <v-btn @click="LimpiarCampos()">
+        <v-btn class="colorButton me-4 mt-4" @click="LimpiarCampos()">
           Limpiar campos
         </v-btn>
       </div>  

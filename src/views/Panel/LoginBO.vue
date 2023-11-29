@@ -4,8 +4,8 @@
           <v-layout class="conteiner">
             <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
               <v-card style="margin-bottom:200px;">
-                <div class="pa-3">
-                    LOGO GOES HERE
+                <div class="imagen">
+                  <img src="https://github.com/AgusMartino/images_Front/blob/45f4245150e4fb48790898382e17294ec26294eb/Logo_Empresa.png?raw=true" alt="">
                 </div>
                 <hr>
                 <v-card-title primary-title>
@@ -99,5 +99,9 @@ export default{
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+.imagen{
+  display: grid;
+  place-items: center;
 }
 </style>

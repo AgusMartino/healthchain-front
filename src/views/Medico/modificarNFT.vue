@@ -36,13 +36,13 @@
     ></v-text-field>
     <div>
       <v-btn
-      class="me-4"
+      class="colorButton me-4 mt-4"
       @click="ModificarNFT()"
       >
       Modificar NFT
       </v-btn>
 
-      <v-btn @click="LimpiarCampos()">
+      <v-btn class="colorButton me-4 mt-4" @click="LimpiarCampos()">
         Limpiar campos
       </v-btn>
     </div>  
@@ -152,5 +152,8 @@
       margin-right: 20%;
       justify-content: space-around;
       align-items: center;
+  }
+  .colorButton{
+    background-color: #CFD0CF;
   }
 </style>

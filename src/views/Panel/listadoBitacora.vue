@@ -1,5 +1,13 @@
 <template>
-    <div>
+    <div class="loading" v-if="loading">
+        <v-progress-circular
+        :size="70"
+        :width="7"
+        color="purple"
+        indeterminate
+        ></v-progress-circular>
+    </div>
+    <div v-if="!loading">
         <v-layout row wrap>
             <v-flex xs12 sm6 md4>
                     <v-text-field
@@ -20,7 +28,7 @@
                     ></v-text-field>
             </v-flex>
         </v-layout>
-        <v-btn @click="GetBitacoras()">
+        <v-btn class="colorButton me-4 mt-4" @click="GetBitacoras()">
           Obtener Bitacoras
         </v-btn>
     </div>
@@ -65,6 +73,7 @@ import axios from 'axios'
   export default {
     data () {
       return {
+        loading: false,
         validacionFechas: false,
         JsonMapper:[
             {
@@ -94,6 +103,8 @@ import axios from 'axios'
             type: "INFO",
             creation_date: "",
           }
+          this.loading = true
+          console.log(this.loading)
           axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
@@ -106,7 +117,6 @@ import axios from 'axios'
                         .then(response=>{
                             if(response.status == 200){
                                 this.JsonMapper = response.data;
-                                this.validacionFechas = true
                                 console.log("Se obtuvo info")
                                 console.log(response.data)
                             }
@@ -114,7 +124,20 @@ import axios from 'axios'
                         .catch(err =>{
                             alert(err.data)
                         })
+                        .finally(data =>{
+                            this.loading = false
+                            this.validacionFechas = true
+                        })
+                        
         }
     }
   }
 </script>
+<style>
+.loading {
+  display: grid;
+  place-items: center;
+  height: 50%;
+  width: 100%;
+}
+</style>

@@ -8,18 +8,22 @@
         <v-btn v-if="this.$store.state.user_type == '3'" to="/HomeBO" class="mr-2">HealthChain</v-btn>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn v-if="this.$store.state.user_type == '1'" to="/gestorNFTEE" class="mr-2">Gestor NFT</v-btn>
-      <v-btn v-if="this.$store.state.user_type == '1'" to="/gestorMedicosEE" class="mr-2">Gestor Medicos</v-btn>
-      <v-btn v-if="this.$store.state.user_type == '1'" to="/gestorUsuariosEE" class="mr-2">Gestor Usuarios</v-btn>
-      <v-btn v-if="this.$store.state.user_type == '2'" to="/NftsPropiedadMedico" class="mr-2">Gestor NFT</v-btn>
-      <v-btn v-if="this.$store.state.user_type == '2'" to="/gestorSolicitudesM" class="mr-2">Gestor de solicitudes</v-btn>
-      <v-btn v-if="this.$store.state.user_type == '2'" to="/listadoEmpresasAsociadasM" class="mr-2">Listado de empresas asociadas</v-btn>
-      <v-btn v-if="this.$store.state.user_type == '3'" to="/gestorEmpresaBO" class="mr-2">Gestor de Empresas</v-btn>
-      <v-btn v-if="this.$store.state.user_type == '3'" to="/gestorUsuariosAdminBO" class="mr-2">Gestor de Usuarios de Empresas</v-btn>
-      <v-btn v-if="this.$store.state.user_type == '3'" to="/listadoTransaccionesBO" class="mr-2">Transacciones</v-btn>
+      <p v-if="this.$store.state.user_type != null" class="mr-2"><b>Usuario:</b> {{ this.$store.state.username }}</p>
+      <p v-if="this.$store.state.user_type == '1'" class="mr-2"><b>Tipo:</b> Empresa</p>
+      <p v-if="this.$store.state.user_type == '2'" class="mr-2"><b>Tipo:</b> Medico</p>
+      <p v-if="this.$store.state.user_type == '3'" class="mr-2"><b>Tipo:</b> BackOffice</p>
       <v-btn @click="logout" v-if="this.$store.state.userIsAuthorized">Logout</v-btn>
     </v-toolbar>
-    <v-content>
+    <v-content class="Empresa" v-if="this.$store.state.user_type == '1'">
+      <router-view></router-view>
+    </v-content>
+    <v-content class="Medico" v-if="this.$store.state.user_type == '2'">
+      <router-view></router-view>
+    </v-content>
+    <v-content v-if="this.$store.state.user_type == '3'">
+      <router-view></router-view>
+    </v-content>
+    <v-content v-if="this.$store.state.user_type == null">
       <router-view></router-view>
     </v-content>
   </v-app>
@@ -52,3 +56,15 @@ export default {
   }
 }
 </script>
+<style>
+.Medico {
+  background-color: #A8F6B8;
+  height: 100%;
+  width: 100%;
+}
+.Empresa {
+  background-color: #BBCECF;
+  height: 100%;
+  width: 100%;
+}
+</style>

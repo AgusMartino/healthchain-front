@@ -1,7 +1,16 @@
 <template>
-    <v-table>
-      <thead>
-        <tr>
+  <div class="loading" v-if="loading">
+      <v-progress-circular
+      :size="70"
+      :width="7"
+      color="purple"
+      indeterminate
+      ></v-progress-circular>
+  </div>
+  <div v-if="!loading">
+    <v-table class="colorTableEmpresa" variant="outlined">
+      <thead variant="outlined">
+        <tr variant="outlined">
           <th class="text-left">
             Usuario
           </th>
@@ -29,16 +38,18 @@
           <td>{{ item.rolseleccionado }}</td>
           <td>{{ item.fecha_creacion }}</td>
           <td>{{ item.estado }}</td>
-          <td><v-btn variant="outlined" :to="{name:'aceptarRechazarSolicitudEE', params:{user:item.id_usuario}}">Aceptar/Rechazar</v-btn></td>
+          <td><v-btn variant="outlined" class="colorButton" :to="{name:'aceptarRechazarSolicitudEE', params:{user:item.id_usuario}}">Aceptar/Rechazar</v-btn></td>
         </tr>
       </tbody>
     </v-table>
+  </div>
 </template>
 <script>
 import axios from 'axios'
   export default {
     data () {
       return {
+        loading: false,
         JsonMapper:[
             {
                 id_solicitud: "string",
@@ -73,6 +84,7 @@ import axios from 'axios'
             type: "INFO",
             creation_date: "",
           }
+          this.loading = true
           axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
@@ -91,6 +103,9 @@ import axios from 'axios'
                       })
                       .catch(err =>{
                         alert(err.data)
+                      })
+                      .finally(data =>{ 
+                          this.loading = false
                       })
         }
     }

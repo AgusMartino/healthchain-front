@@ -1,37 +1,47 @@
 <template>
-    <v-container row wrap align-center>
-      <v-slide-y-transition mode="out-in">
-          <v-layout class="layout">
-            <div>
-                <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
-                    <v-card class="mx-auto" max-width="344" variant="outlined">
-                        <div class="pa-3">
-                            Imagen empresa
-                        </div>
-                        <hr>
-                        <v-card-actions>
-                        <v-btn  variant="outlined" @click="RegisterUsuarioEmpresa()">Soy empleado de obra social</v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-flex>
-            </div>
+    <div class="loading" v-if="loading">
+        <v-progress-circular
+        :size="70"
+        :width="7"
+        color="purple"
+        indeterminate
+        ></v-progress-circular>
+    </div>
+    <div v-if="form">
+        <v-container row wrap align-center>
+        <v-slide-y-transition mode="out-in">
+            <v-layout class="layout">
+                <div>
+                    <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
+                        <v-card class="mx-auto" max-width="344" variant="outlined">
+                            <div class="pa-3">
+                                Imagen empresa
+                            </div>
+                            <hr>
+                            <v-card-actions>
+                            <v-btn  variant="outlined" @click="RegisterUsuarioEmpresa()">Soy empleado de obra social</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-flex>
+                </div>
 
-            <div>
-                <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
-                    <v-card class="mx-auto" max-width="344" variant="outlined">
-                        <div class="pa-3">
-                            Imagen medico
-                        </div>
-                        <hr>
-                        <v-card-actions>
-                        <v-btn variant="outlined" @click="RegisterMedico()">Soy medico</v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-flex>
-            </div>
-          </v-layout>
-        </v-slide-y-transition>
-    </v-container>
+                <div>
+                    <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
+                        <v-card class="mx-auto" max-width="344" variant="outlined">
+                            <div class="pa-3">
+                                Imagen medico
+                            </div>
+                            <hr>
+                            <v-card-actions>
+                            <v-btn variant="outlined" @click="RegisterMedico()">Soy medico</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-flex>
+                </div>
+            </v-layout>
+            </v-slide-y-transition>
+        </v-container>
+    </div>
 </template>
 <script>
 import axios from 'axios'
@@ -39,6 +49,8 @@ import router from '../router'
 export default{
     data(){
         return {
+            loading: false,
+            form: false,
             entradasJSON: [],
         };
     },
@@ -49,8 +61,10 @@ export default{
     },
     methods:{
         validateUser(){
+              
               const jsonPayload = this.parseJwt();
               console.log(jsonPayload.email.toString())
+              this.loading = true
               axios.get("https://healthchain-api-usuarios-9e18a4d4a113.herokuapp.com/api/User/ValidateUser/" + jsonPayload.email.toString())
                 .then(response=>{
                     if(response.status == 200){
@@ -70,14 +84,20 @@ export default{
                                     router.replace('/homeEE')
                                 }
                             }else if(this.entradasJSON.user_type == 2){
-                            router.replace('/homeM')
-                            }
+                                router.replace('/homeM')
+                                }
                             }else if(this.entradasJSON.user_type == null){
-                            router.replace('/seleccionUsuario')}
+                                router.replace('/seleccionUsuario')
+                                }
+                            
                     } 
                 })
                 .catch(err =>{
                   alert("Seleccione el tipo de usuario que es")
+                })
+                .finally(data =>{
+                    this.form = true
+                    this.loading = false
                 })
                 console.log(this)
               
@@ -188,7 +208,6 @@ export default{
                                 this.$store.state.rol = this.entradasJSON.rol.rol;
                                 this.$store.state.user_type = this.entradasJSON.user_type;
                                 }
-                            router.replace('/homeM')
                             }
                         })
                         router.replace('/seleccionEmpresaUser')
@@ -214,6 +233,12 @@ export default{
 }
 </script>
 <style>
+.loading {
+  display: grid;
+  place-items: center;
+  height: 50%;
+  width: 100%;
+}
 .layout{
     display: flex;
     justify-content: space-around;

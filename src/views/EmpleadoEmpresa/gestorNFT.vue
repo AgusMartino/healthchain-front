@@ -2,57 +2,53 @@
   <v-container row wrap align-center>
     <v-slide-y-transition mode="out-in">
         <v-layout class="layout">
-          <div>
-              <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
-                  <v-card class="mx-auto" max-width="344" variant="outlined">
-                      <div class="pa-3">
-                          Imagen button
-                      </div>
-                      <hr>
-                      <v-card-actions>
-                      <v-btn  variant="outlined" to="/NftsPropiedadEmpleadoEmpresa">Nfts En Propiedad</v-btn>
+            <div class="colorButton">
+                <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
+                    <v-card class="mx-auto" max-width="1500" variant="outlined">
+                        <v-card-actions>
+                        <div class="imagen">
+                            <i class="fa-brands fa-hive fa-2xl"></i>
+                        </div>
+                      <v-btn to="/NftsPropiedadEmpleadoEmpresa">Nfts En Propiedad</v-btn>
                       </v-card-actions>
                   </v-card>
               </v-flex>
           </div>
 
-          <div>
-              <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
-                  <v-card class="mx-auto" max-width="344" variant="outlined">
-                      <div class="pa-3">
-                          Imagen button
-                      </div>
-                      <hr>
-                      <v-card-actions>
-                      <v-btn variant="outlined" to="/crearNFTEE">Crear Nft</v-btn>
+          <div class="colorButton">
+                <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
+                    <v-card class="mx-auto" max-width="1500" variant="outlined">
+                        <v-card-actions>
+                        <div class="imagen">
+                            <i class="fa-brands fa-hive fa-2xl"></i>
+                        </div>
+                      <v-btn to="/crearNFTEE">Crear Nft</v-btn>
                       </v-card-actions>
                   </v-card>
               </v-flex>
           </div>
 
-          <div>
-              <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
-                  <v-card class="mx-auto" max-width="344" variant="outlined">
-                      <div class="pa-3">
-                          Imagen button
-                      </div>
-                      <hr>
-                      <v-card-actions>
-                      <v-btn variant="outlined" to="/transferirNFTEE">Transferir Nft a Prestador</v-btn>
+          <div class="colorButton">
+                <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
+                    <v-card class="mx-auto" max-width="1500" variant="outlined">
+                        <v-card-actions>
+                        <div class="imagen">
+                            <i class="fa-solid fa-right-left fa-2xl"></i>
+                        </div>
+                      <v-btn to="/transferirNFTEE">Transferir Nft a Prestador</v-btn>
                       </v-card-actions>
                   </v-card>
               </v-flex>
           </div>
 
-          <div>
-              <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
-                  <v-card class="mx-auto" max-width="344" variant="outlined">
-                      <div class="pa-3">
-                          Imagen button
-                      </div>
-                      <hr>
-                      <v-card-actions>
-                      <v-btn variant="outlined" to="/listadosNFTsAcomprarEE">Comprar NFT</v-btn>
+          <div class="colorButton">
+                <v-flex xs12 sm8 offset-sm2 md6 offset-md3 lg4 offset-lg4>
+                    <v-card class="mx-auto" max-width="1500" variant="outlined">
+                        <v-card-actions>
+                        <div class="imagen">
+                            <i class="fa-solid fa-cart-shopping fa-2xl"></i>
+                        </div>
+                      <v-btn to="/listadosNFTsAcomprarEE">Comprar NFT</v-btn>
                       </v-card-actions>
                   </v-card>
               </v-flex>

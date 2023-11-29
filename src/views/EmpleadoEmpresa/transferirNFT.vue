@@ -13,7 +13,7 @@
             label="Identificador NFT"
           ></v-text-field>
 
-      <v-btn variant="outlined" @click="GetNFT()">Buscar NFT</v-btn>
+      <v-btn class="colorButton me-4 mt-4" @click="GetNFT()">Buscar NFT</v-btn>
     </form>
   
     <form class="form" v-if="validacionNFT">
@@ -38,7 +38,7 @@
         ></v-text-field>
         <div>
           <v-btn
-          class="me-4"
+          class="colorButton me-4 mt-4"
           @click="Transaferir()"
         >
           Transferir NFT
