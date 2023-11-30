@@ -1,5 +1,5 @@
 <template>
-  <div v-if="loading">
+  <div class="loading" v-if="loading">
       <v-progress-circular
       :size="70"
       :width="7"
@@ -15,7 +15,7 @@
           label="Cuit"
         ></v-text-field>
 
-        <v-btn variant="outlined" @click="GetEmpresa()">Buscar empresa</v-btn>
+        <v-btn class="colorButton me-4 mt-4" @click="GetEmpresa()">Buscar empresa</v-btn>
       </form>
 
       <form class="form" v-if="validacionCuit">
@@ -44,7 +44,7 @@
         ></v-text-field>
         <div>
           <v-btn
-          class="me-4"
+          class="colorButton me-4 mt-4"
           @click="Solicitud()"
         >
           Enviar Solicitud
@@ -101,6 +101,7 @@
                   type: "INFO",
                   creation_date: "",
                 }
+                this.loading = true
                 axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
@@ -122,6 +123,9 @@
                 .catch(err =>{
                   alert(err.data)
                 })
+                .finally(data =>{ 
+                  this.loading = false
+                })
               },
             GetUser(){
               const BitacoraRequest = {
@@ -133,7 +137,7 @@
                 type: "INFO",
                 creation_date: "",
               }
-              this.loading = false
+              this.loading = true
               axios.post("https://healthchain-api-bitacora-8ac3b5dd6f8a.herokuapp.com/api/Bitacora/AddBitacora", BitacoraRequest)
                         .then(response=>{
                             if(response.status == 200){
